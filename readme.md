@@ -2,8 +2,13 @@
 <h1>WhatsApp AI Bot</h1>
 </div>
 
-The WhatsApp bot that can response to user input using AI models APIS like chat-GPT, Dalle and DreamStudio.
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including GPT, DALL-E, and DreamStudio, and users can also create their own models to customize the bot's behavior.
 
+# Features
+- Generate text responses to user input using various AI models.
+- Support for GPT, DALL-E, DreamStudio, and other models via API integration.
+- Easy-to-use API for creating custom AI models and integrating with the bot.
+- Integration with WhatsApp for easy deployment and messaging.
 
 ## Requirements
 
@@ -19,6 +24,8 @@ The WhatsApp bot that can response to user input using AI models APIS like chat-
 
 ```bash
     git clone <this_repo>
+    cd 
 ```
 
 > OR
+
