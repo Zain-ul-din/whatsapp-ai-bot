@@ -27,17 +27,17 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  cd WhatsApp-Ai-bot
 ```
 
-- > OR
+> OR
 
 - [Download Zip File](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/archive/refs/heads/master.zip)
 
 **Install packages**
 
-```
-npx yarn
-# or
-npm i yarn -g
-yarn
+```bash
+ $ npx yarn
+ # or
+ $ npm i yarn -g
+ $ yarn
 ```
 
 **Get API Keys**
@@ -51,16 +51,16 @@ yarn
 - create `.env` in the root of the project.
 
 - set following fields in `.env` file
-```
+```.env
  OPENAI_API_KEY=<YOUR_OPEN_AI_API_KEY>
  DREAMSTUDIO_API_KEY=<YOUR_STABILITY_AI_API_KEY>
 ```
 
 **Running Server**
 
-```
- yarn dev
+```bash
+ $ yarn dev
  # or
- npx yarn dev
+ $ npx yarn dev
 ```
 
