@@ -27,9 +27,9 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  cd WhatsApp-Ai-bot
 ```
 
-> OR
+- > OR
 
-[Download Zip File](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/archive/refs/heads/master.zip)
+- [Download Zip File](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/archive/refs/heads/master.zip)
 
 **Install packages**
 
