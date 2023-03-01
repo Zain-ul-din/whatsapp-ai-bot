@@ -2,9 +2,20 @@
 <h1>WhatsApp AI Bot</h1>
 </div>
 
-![Untitled (1)](https://user-images.githubusercontent.com/78583049/222102919-9d09417d-7e44-4efd-b482-f5893c7bc5f6.png)
+![Banner (1)](https://user-images.githubusercontent.com/78583049/222102919-9d09417d-7e44-4efd-b482-f5893c7bc5f6.png)
 
 The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **CHAT-GPT**, **DALL-E**, and **Stability AI**, and users can also create their own models to customize the bot's behavior.
+
+# Table of Content
+
+- [Demo.](#demo)
+- [Features.](#features)
+- [Requirements.](#requirements)
+- [Usage.](#usage)
+- [Docs.](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
+- [Disclaimer.](#disclaimer)
+- [Contributors.](#contributors-✨)
+- [About.](#about-us)
 
 # Demo
 
@@ -103,7 +114,8 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 
 <!-- about -->
 
-##
+## About Us
+
 <div align="center">
 <h4 font-weight="bold">This repository is maintained by <a href="https://github.com/Zain-ul-din">Zain-Ul-Din</a></h4>
 <p> Show some ❤️ by starring this awesome repository! </p>
