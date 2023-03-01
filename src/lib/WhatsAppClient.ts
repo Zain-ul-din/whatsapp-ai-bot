@@ -71,7 +71,7 @@ class WhatsAppClient {
         const msgStr = message.body;
 
         if (msgStr.length == 0 || message.hasMedia) return;
-        
+
         const modelToUse = Util.getModelByPrefix(msgStr);
 
         // message without prefix
@@ -85,10 +85,12 @@ class WhatsAppClient {
         // message with prefix
         if (this.promptModels.get(modelToUse)) {
             const model: IModelConfig = config.models[modelToUse as AiModels] as IModelConfig;
-            this.promptModels.get(modelToUse)?.sendMessage(msgStr.replace(model.prefix, ""), message);
+            this.promptModels
+                .get(modelToUse)
+                ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
             // use custom model
-            this.customModel.sendMessage ({ prompt: msgStr, modelName: modelToUse}, message);
+            this.customModel.sendMessage({ prompt: msgStr, modelName: modelToUse }, message);
         }
     }
 
@@ -100,9 +102,11 @@ class WhatsAppClient {
     public async sendMessage(msgStr: string, message: Message, modelName: string) {
         if (this.promptModels.get(modelName as AiModels)) {
             const model: IModelConfig = config.models[modelName as AiModels] as IModelConfig;
-            this.promptModels.get(modelName as AiModels)?.sendMessage(msgStr.replace(model.prefix, ""), message);
+            this.promptModels
+                .get(modelName as AiModels)
+                ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
-            this.customModel.sendMessage ({ prompt: msgStr, modelName}, message);
+            this.customModel.sendMessage({ prompt: msgStr, modelName }, message);
         }
     }
 

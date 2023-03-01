@@ -21,11 +21,11 @@ const config: Config = {
                 modelName: 'whatsapp-ai-bot', // Name of the custom model
                 prefix: '!bot', // Prefix for the custom model
                 enable: true, // Whether the custom model is enabled or not
-                /** 
-                 * context: "file-path (.txt, .text, .md)", 
+                /**
+                 * context: "file-path (.txt, .text, .md)",
                  * context: "text url",
                  * context: "text"
-                */
+                 */
                 context: './static/whatsapp-ai-bot.md' // Context for the custom model
             }
         ]
@@ -39,4 +39,3 @@ const config: Config = {
 };
 
 export default config;
-

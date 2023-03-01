@@ -17,7 +17,6 @@ import { readFile } from 'fs/promises';
 export type CustomModelProps = { prompt: string; modelName: string };
 
 class CustomModel extends AiModel<CustomModelProps> {
-    
     public constructor() {
         super(ENV.openAIKey, 'Custom');
         this.client = new ChatGPTAPI({ apiKey: this.apiKey });
@@ -34,11 +33,11 @@ class CustomModel extends AiModel<CustomModelProps> {
 
             const startTime = Date.now();
 
-            const contextPrompt = CustomModel.createContext(await CustomModel.readContext(customModel), prompt.replace(customModel.prefix, ""));
-            const aiRes = await this.client.sendMessage(
-                contextPrompt,
-                this.history[msg.from]
+            const contextPrompt = CustomModel.createContext(
+                await CustomModel.readContext(customModel),
+                prompt.replace(customModel.prefix, '')
             );
+            const aiRes = await this.client.sendMessage(contextPrompt, this.history[msg.from]);
 
             this.history[msg.from as keyof SendMessageOptions] = {
                 conversationId: aiRes.conversationId,
@@ -97,18 +96,17 @@ class CustomModel extends AiModel<CustomModelProps> {
             'ws://',
             'wss://'
         ];
-        
+
         if (
-            httpProtocols.filter((protocol) => model.context.trim().startsWith(protocol)).length >
-            0
+            httpProtocols.filter((protocol) => model.context.trim().startsWith(protocol)).length > 0
         ) {
             const res = await fetch(model.context);
             return res.text();
         }
-        
+
         if (supportedFiles.filter((fileExt) => model.context.trim().endsWith(fileExt)).length > 0) {
-            return readFile (model.context, { encoding: "utf-8"});
-        } 
+            return readFile(model.context, { encoding: 'utf-8' });
+        }
 
         // plane text
         return model.context;
