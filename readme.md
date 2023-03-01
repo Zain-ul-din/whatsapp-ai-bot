@@ -31,7 +31,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 # Usage
 
-**Download Source Code**
+**1. Download Source Code**
 
 ```bash
  git clone https://github.com/Zain-ul-din/WhatsApp-Ai-bot.git
@@ -42,7 +42,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 - [Download Zip File](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/archive/refs/heads/master.zip)
 
-**Install packages**
+**2. Install packages**
 
 ```bash
  $ npx yarn
@@ -51,12 +51,12 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  $ yarn
 ```
 
-**Get API Keys**
+**3. Get API Keys**
 
 - [OpenAI API Key](https://platform.openai.com/account/api-keys)
 - [StabilityAI API Key](https://platform.stability.ai/docs/getting-started/authentication)
 
-**Add API Keys**
+**4. Add API Keys**
 
 
 - create `.env` in the root of the project.
@@ -67,7 +67,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  DREAMSTUDIO_API_KEY=<YOUR_STABILITY_AI_API_KEY>
 ```
 
-**Run Server**
+**5. Run Server**
 
 ```bash
  $ yarn dev
@@ -84,7 +84,8 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - `!stable` use Stability AI.
 - `!bot` use custom model.
 
-**!Note open `src/whatsapp-ai.config.ts` to edit config.**
+**Note! open `src/whatsapp-ai.config.ts` to edit config.**
+
 
 
 
