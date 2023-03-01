@@ -6,7 +6,11 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 # Demo
 
+**Stability AI + Chat-GPT**
 ![image](https://user-images.githubusercontent.com/78583049/222071673-ef0f2021-a8b4-4263-9304-a77ecd76c0a1.png)
+
+**Dalle + Custom Model** 
+![image](https://user-images.githubusercontent.com/78583049/222074174-55792d13-5137-4c1c-b708-3ad188ca8d8d.png)
 
 
 # Features

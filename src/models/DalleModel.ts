@@ -13,6 +13,7 @@ class DalleModel extends AiModel<string> {
         this.client = new OpenAIApi(new Configuration({ apiKey: this.apiKey }));
     }
 
+
     public async sendMessage(prompt: string, msg: Message): Promise<void> {
         const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, msg.from, prompt));
         spinner.start();
@@ -33,7 +34,7 @@ class DalleModel extends AiModel<string> {
                 MessageTemplates.reqSucceedStr(
                     this.aiModelName,
                     msg.from,
-                    image.data,
+                    response.data.data[0].url as string,
                     Date.now() - startTime
                 )
             );
