@@ -86,6 +86,8 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
+# Disclaimer
 
+This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
 
 
