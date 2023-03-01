@@ -112,6 +112,10 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
   <img src="https://contrib.rocks/image?repo=Zain-ul-din/WhatsApp-Ai-bot" />
 </a>
 
+
+- [Open issue here](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/issues)
+- [Ask Question here](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/discussions)
+
 <!-- about -->
 
 ## About Us
