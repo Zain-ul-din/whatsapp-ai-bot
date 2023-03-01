@@ -20,6 +20,8 @@ import { Util } from '../util/Util';
 
 // hooks
 import { useSpinner } from '../hooks/useSpinner';
+import { Key } from 'readline';
+import { IModelConfig } from '../types/Config';
 
 class WhatsAppClient {
     public constructor() {
@@ -68,6 +70,8 @@ class WhatsAppClient {
     private async onMessage(message: Message) {
         const msgStr = message.body;
 
+        if (msgStr.length == 0 || message.hasMedia) return;
+        
         const modelToUse = Util.getModelByPrefix(msgStr);
 
         // message without prefix
@@ -80,7 +84,8 @@ class WhatsAppClient {
 
         // message with prefix
         if (this.promptModels.get(modelToUse)) {
-            this.promptModels.get(modelToUse)?.sendMessage(msgStr, message);
+            const model: IModelConfig = config.models[modelToUse as AiModels] as IModelConfig;
+            this.promptModels.get(modelToUse)?.sendMessage(msgStr.replace(model.prefix, ""), message);
         } else {
             // use custom model
             this.customModel.sendMessage ({ prompt: msgStr, modelName: modelToUse}, message);
@@ -89,15 +94,15 @@ class WhatsAppClient {
 
     private async onSelfMessage(message: Message) {
         if (!message.fromMe || message.hasQuotedMsg) return;
-
         this.onMessage(message);
     }
 
     public async sendMessage(msgStr: string, message: Message, modelName: string) {
         if (this.promptModels.get(modelName as AiModels)) {
-            this.promptModels.get(modelName as AiModels)?.sendMessage(msgStr, message);
+            const model: IModelConfig = config.models[modelName as AiModels] as IModelConfig;
+            this.promptModels.get(modelName as AiModels)?.sendMessage(msgStr.replace(model.prefix, ""), message);
         } else {
-            // use custom model
+            this.customModel.sendMessage ({ prompt: msgStr, modelName}, message);
         }
     }
 

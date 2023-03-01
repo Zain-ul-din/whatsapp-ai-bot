@@ -34,7 +34,7 @@ class CustomModel extends AiModel<CustomModelProps> {
 
             const startTime = Date.now();
 
-            const contextPrompt = CustomModel.createContext(await CustomModel.readContext(customModel), prompt);
+            const contextPrompt = CustomModel.createContext(await CustomModel.readContext(customModel), prompt.replace(customModel.prefix, ""));
             const aiRes = await this.client.sendMessage(
                 contextPrompt,
                 this.history[msg.from]

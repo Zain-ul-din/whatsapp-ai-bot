@@ -2,7 +2,7 @@
 <h1>WhatsApp AI Bot</h1>
 </div>
 
-The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including GPT, DALL-E, and Stability AI, and users can also create their own models to customize the bot's behavior.
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **CHAT-GPT**, **DALL-E**, and **Stability AI**, and users can also create their own models to customize the bot's behavior.
 
 # Features
 - Generate text responses to user input using various AI models.
@@ -56,11 +56,13 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  DREAMSTUDIO_API_KEY=<YOUR_STABILITY_AI_API_KEY>
 ```
 
-**Running Server**
+**Run Server**
 
 ```bash
  $ yarn dev
  # or
  $ npx yarn dev
 ```
+
+
 
