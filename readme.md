@@ -103,4 +103,5 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 <div align="center">
 <h4 font-weight="bold">This repository is maintained by <a href="https://github.com/Zain-ul-din">Zain-Ul-Din</a></h4>
 <p> Show some ❤️ by starring this awesome repository! </p>
+<p>+1 ⭐</p>
 </div>
