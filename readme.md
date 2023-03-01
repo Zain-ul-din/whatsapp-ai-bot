@@ -79,12 +79,12 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 **Default Prefix**
 
-- `!chatgpt` use chat-gpt
-- `!dalle` use Dalle
-- `!stable` use Stability AI
-- `!bot` use custom model
+- `!chatgpt` use chat-gpt.
+- `!dalle` use Dalle.
+- `!stable` use Stability AI.
+- `!bot` use custom model.
 
-**!Note** open `src/whatsapp-ai.config.ts` to edit config.
+**!Note open `src/whatsapp-ai.config.ts` to edit config.**
 
 
 
