@@ -91,7 +91,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
 
 
-## Contributors
+## Contributors ✨
 
 <a href="https://github.com/Zain-ul-din/WhatsApp-Ai-bot/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Zain-ul-din/WhatsApp-Ai-bot" />
@@ -103,5 +103,5 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 <div align="center">
 <h4 font-weight="bold">This repository is maintained by <a href="https://github.com/Zain-ul-din">Zain-Ul-Din</a></h4>
 <p> Show some ❤️ by starring this awesome repository! </p>
-<p>+1 ⭐</p>
 </div>
+
