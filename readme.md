@@ -93,7 +93,7 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 
 ## Contributors
 
-<a href="https://github.com/askrella/whatsapp-chatgpt/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=askrella/whatsapp-chatgpt" />
+<a href="https://github.com/Zain-ul-din/WhatsApp-Ai-bot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Zain-ul-din/WhatsApp-Ai-bot" />
 </a>
 
