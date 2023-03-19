@@ -78,6 +78,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 ```.env
  OPENAI_API_KEY=<YOUR_OPEN_AI_API_KEY>
  DREAMSTUDIO_API_KEY=<YOUR_STABILITY_AI_API_KEY>
+ PORT=3000
 ```
 
 **5. Run Server**

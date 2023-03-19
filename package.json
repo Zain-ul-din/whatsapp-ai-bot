@@ -4,13 +4,15 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "vite-node ./src/index.ts",
+        "dev": "concurrently \"vite-node ./whisper/server.ts\" \"vite-node ./src/index.ts\"",
         "format": "prettier --write ./src",
-        "test": "vite-node ./test/index.test.ts"
+        "test": "vite-node ./test/index.test.ts",
+        "test:whisper": "vite-node ./whisper/server.ts"
     },
     "devDependencies": {
         "@types/node": "^18.14.0",
         "@types/node-fetch": "^2.6.2",
+        "concurrently": "^7.6.0",
         "prettier": "^2.8.4",
         "typescript": "^4.9.5",
         "vite-node": "^0.28.5"
@@ -19,6 +21,7 @@
         "@types/qrcode-terminal": "^0.12.0",
         "chatgpt": "^4.7.2",
         "dotenv": "^16.0.3",
+        "express": "^4.18.2",
         "openai": "^3.1.0",
         "ora": "3.2.0",
         "qrcode-terminal": "^0.12.0",
@@ -26,4 +29,3 @@
         "whatsapp-web.js": "^1.19.4"
     }
 }
-
