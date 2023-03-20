@@ -10,3 +10,6 @@
 
 # local test
 /test
+
+# whisper dist folder
+/whisper/dist

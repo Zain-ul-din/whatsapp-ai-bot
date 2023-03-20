@@ -1,5 +1,5 @@
 // whatsapp client
-import { Client, Message } from 'whatsapp-web.js';
+import { Client, Message, MessageMedia } from 'whatsapp-web.js';
 import QRCode from 'qrcode-terminal';
 
 // config file
@@ -14,6 +14,7 @@ import { ChatGptModel } from '../models/ChatGptModel';
 import { StabilityModel } from '../models/StabilityModel';
 import { DalleModel } from '../models/DalleModel';
 import { CustomModel } from '../models/CustomModel';
+import { WhisperModel } from '../models/WhisperModel';
 
 // utilities
 import { Util } from '../util/Util';
@@ -38,6 +39,7 @@ class WhatsAppClient {
         this.promptModels.set('DALLE', new DalleModel());
         this.promptModels.set('StableDiffusion', new StabilityModel());
 
+        this.whisperModel = new WhisperModel ();
         this.customModel = new CustomModel();
     }
 
@@ -68,18 +70,28 @@ class WhatsAppClient {
     }
 
     private async onMessage(message: Message) {
+        
+        const audioFile = await this.hasAudioFile (message)
+
+        if (audioFile != null)
+        {
+            // use whisper model
+            this.whisperModel.sendMessage (audioFile.data, message);
+            return;
+        }
+
         const msgStr = message.body;
 
         if (msgStr.length == 0 || message.hasMedia) return;
 
         const modelToUse = Util.getModelByPrefix(msgStr);
-
+        
         // message without prefix
         if (modelToUse == undefined && !config.enablePrefix.enable) {
             this.sendMessage(msgStr, message, config.enablePrefix.defaultModel);
             return;
         }
-
+        
         if (modelToUse == undefined) return; // no models added
 
         // message with prefix
@@ -95,6 +107,14 @@ class WhatsAppClient {
     }
 
     private async onSelfMessage(message: Message) {
+        const hasAudio = await this.hasAudioFile (message)
+
+        if (hasAudio != null)
+        {
+            this.onMessage(message);
+            return;
+        }
+
         if (!message.fromMe || message.hasQuotedMsg) return;
         this.onMessage(message);
     }
@@ -110,13 +130,25 @@ class WhatsAppClient {
         }
     }
 
+    
     private client;
 
     // models require prompt to generate output
     private promptModels: Map<AiModels, AiModel<string>>;
     private customModel: CustomModel;
+    private whisperModel: WhisperModel;
 
-    // Helper class
+    // helper functions
+
+    async hasAudioFile (msg: Message): Promise<MessageMedia | null>
+    {
+        if(msg.hasMedia) {
+            const media = await msg.downloadMedia();
+            if(media.mimetype.startsWith('audio/ogg')) return media;
+        }
+        
+        return null;
+    }
 }
 
 export { WhatsAppClient };
