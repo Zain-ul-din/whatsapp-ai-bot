@@ -71,7 +71,6 @@
 
 **3. Add API Keys**
 
-
 - create `.env` in the root of the project.
 
 - set following fields in `.env` file

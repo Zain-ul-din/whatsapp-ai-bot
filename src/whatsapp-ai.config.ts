@@ -26,7 +26,7 @@ const config: Config = {
                  * context: "text url",
                  * context: "text"
                  */
-                context: './static/whatsapp-ai-bot.md' // Context for the custom model
+                context: './static/whatsapp-ai-bot.md', // Context for the custom model
             }
         ]
     },

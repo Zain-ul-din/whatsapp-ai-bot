@@ -30,20 +30,29 @@ class CustomModel extends AiModel<CustomModelProps> {
         try {
             const customModel = CustomModel.getCustomModel(modelName);
             if (!customModel) return;
-
+            
+            let sender = ''
+            if (customModel.includeSender)
+            {
+                const chat = await msg.getChat();
+                sender = `${sender}: ${chat.name}`;
+            }
+            
             const startTime = Date.now();
 
             const contextPrompt = CustomModel.createContext(
                 await CustomModel.readContext(customModel),
-                prompt.replace(customModel.prefix, '')
+                prompt.replace(customModel.prefix, ''),
+                sender
             );
+
             const aiRes = await this.client.sendMessage(contextPrompt, this.history[msg.from]);
 
             this.history[msg.from as keyof SendMessageOptions] = {
                 conversationId: aiRes.conversationId,
                 parentMessageId: aiRes.id
             };
-
+            
             msg.reply(aiRes.text);
             spinner.succeed(
                 MessageTemplates.reqSucceedStr(
@@ -65,8 +74,9 @@ class CustomModel extends AiModel<CustomModelProps> {
         }
     }
 
-    private static createContext(context: string, prompt: string) {
+    private static createContext(context: string, prompt: string, sender: string = '') {
         return `
+        ${sender} 
         context:
             ${context}
         note!
@@ -75,7 +85,7 @@ class CustomModel extends AiModel<CustomModelProps> {
             ${prompt}
         `;
     }
-
+    
     private static getCustomModel(modelName: string): IModelType | undefined {
         if (!config.models.Custom) return undefined;
         for (let model of config.models.Custom) if (model.modelName == modelName) return model;
