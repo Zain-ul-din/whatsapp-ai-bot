@@ -20,7 +20,6 @@ import { Util } from '../util/Util';
 
 // hooks
 import { useSpinner } from '../hooks/useSpinner';
-import { Key } from 'readline';
 import { IModelConfig } from '../types/Config';
 
 class WhatsAppClient {
@@ -95,7 +94,8 @@ class WhatsAppClient {
     }
 
     private async onSelfMessage(message: Message) {
-        if (!message.fromMe || message.hasQuotedMsg) return;
+        if (!message.fromMe) return;  
+        if (message.hasQuotedMsg && !Util.getModelByPrefix (message.body)) return;
         this.onMessage(message);
     }
 
@@ -109,14 +109,15 @@ class WhatsAppClient {
             this.customModel.sendMessage({ prompt: msgStr, modelName }, message);
         }
     }
-
+    
     private client;
 
     // models require prompt to generate output
     private promptModels: Map<AiModels, AiModel<string>>;
     private customModel: CustomModel;
 
-    // Helper class
+    // Helper functions
+
 }
 
 export { WhatsAppClient };
