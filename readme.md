@@ -8,6 +8,10 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 **[Watch Tutorial](https://www.youtube.com/watch?v=fyPD3ILFPck)**
 
+### FQA
+
+- [How to create custom model](https://github.com/Zain-ul-din/whatsapp-ai-bot/issues/3)
+
 # Table of Content
 
 - [Demo.](#demo)
