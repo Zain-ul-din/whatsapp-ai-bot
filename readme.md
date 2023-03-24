@@ -8,7 +8,7 @@
 
 ### Tutorials
 - **[Setup bot on Github codespaces](https://www.youtube.com/watch?v=QahJSi6Ygj4)**
-- **[bot setup](https://www.youtube.com/watch?v=fyPD3ILFPck)**
+- **[setup bot on local machine](https://www.youtube.com/watch?v=fyPD3ILFPck)**
 
 ### FQA
 
