@@ -6,7 +6,9 @@
 
 The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **CHAT-GPT**, **DALL-E**, and **Stability AI**, and users can also create their own models to customize the bot's behavior.
 
-**[Watch Tutorial](https://www.youtube.com/watch?v=fyPD3ILFPck)**
+### Tutorials
+- **[Setup bot on Github codespaces](https://www.youtube.com/watch?v=QahJSi6Ygj4)**
+- **[bot setup](https://www.youtube.com/watch?v=fyPD3ILFPck)**
 
 ### FQA
 
@@ -20,7 +22,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - [Usage.](#usage)
 - [Docs.](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
 - [Disclaimer.](#disclaimer)
-- [Contributors.](#contributors-✨)
+- [Contributors.](#contributors)
 - [About.](#about-us)
 
 # Demo
@@ -100,7 +102,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
 
 
-## Contributors ✨
+## Contributors
 
 <a href="https://github.com/Zain-ul-din/WhatsApp-Ai-bot/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Zain-ul-din/WhatsApp-Ai-bot" />
