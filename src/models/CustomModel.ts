@@ -35,7 +35,7 @@ class CustomModel extends AiModel<CustomModelProps> {
             if (customModel.includeSender)
             {
                 const chat = await msg.getChat();
-                sender = `${sender}: ${chat.name}`;
+                sender = `sender: ${chat.name}`;
             }
             
             const startTime = Date.now();
@@ -85,7 +85,7 @@ class CustomModel extends AiModel<CustomModelProps> {
             ${prompt}
         `;
     }
-    
+
     private static getCustomModel(modelName: string): IModelType | undefined {
         if (!config.models.Custom) return undefined;
         for (let model of config.models.Custom) if (model.modelName == modelName) return model;
