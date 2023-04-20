@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@types/qrcode-terminal": "^0.12.0",
-        "chatgpt": "^4.7.2",
+        "chatgpt": "^5.2.2",
         "dotenv": "^16.0.3",
         "openai": "^3.1.0",
         "ora": "3.2.0",

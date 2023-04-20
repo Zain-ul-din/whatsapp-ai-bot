@@ -10,10 +10,12 @@ import { ENV } from '../lib/env';
 class ChatGptModel extends AiModel<string> {
     public constructor() {
         super(ENV.openAIKey, 'ChatGPT');
-        this.client = new ChatGPTAPI({ apiKey: this.apiKey });
+        this.client = new ChatGPTAPI({ 
+            apiKey: this.apiKey
+        });
         this.history = {};
     }
-
+    
     public async sendMessage(prompt: string, msg: Message): Promise<void> {
         const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, msg.from, prompt));
         spinner.start();
