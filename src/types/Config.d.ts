@@ -24,4 +24,5 @@ export type Config = {
     };
 } & {
     enablePrefix: IDefaultConfig;
+    chatGPTModel: string
 };

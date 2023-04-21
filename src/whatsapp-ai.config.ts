@@ -2,6 +2,7 @@
 import { Config } from './types/Config';
 
 const config: Config = {
+    chatGPTModel: "gpt-3.5-turbo", // learn more about GPT models https://platform.openai.com/docs/models
     models: {
         ChatGPT: {
             prefix: '!chatgpt', // Prefix for the ChatGPT model
@@ -22,10 +23,10 @@ const config: Config = {
                 prefix: '!bot', // Prefix for the custom model
                 enable: true, // Whether the custom model is enabled or not
                 /**
-                 * context: "file-path (.txt, .text, .md)",
-                 * context: "text url",
-                 * context: "text"
-                 */
+                    * context: "file-path (.txt, .text, .md)",
+                    * context: "text url",
+                    * context: "text"
+                  */
                 context: './static/whatsapp-ai-bot.md', // Context for the custom model
             }
         ]

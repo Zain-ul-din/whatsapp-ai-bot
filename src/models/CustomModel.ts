@@ -19,10 +19,16 @@ export type CustomModelProps = { prompt: string; modelName: string };
 class CustomModel extends AiModel<CustomModelProps> {
     public constructor() {
         super(ENV.openAIKey, 'Custom');
-        this.client = new ChatGPTAPI({ apiKey: this.apiKey });
+        this.client = new ChatGPTAPI({
+            apiKey: this.apiKey,
+            completionParams: {
+                model: config.chatGPTModel,
+                max_tokens: 2000
+            } 
+        });
         this.history = {};
     }
-
+    
     public async sendMessage({ prompt, modelName }: CustomModelProps, msg: Message): Promise<void> {
         const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, msg.from, prompt));
         spinner.start();

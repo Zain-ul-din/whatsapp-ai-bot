@@ -7,11 +7,17 @@ import { MessageTemplates } from '../util/MessageTemplates';
 
 import { ENV } from '../lib/env';
 
+import config from '../whatsapp-ai.config';
+
 class ChatGptModel extends AiModel<string> {
     public constructor() {
         super(ENV.openAIKey, 'ChatGPT');
         this.client = new ChatGPTAPI({ 
-            apiKey: this.apiKey
+            apiKey: this.apiKey,
+            completionParams: {
+                model: config.chatGPTModel,
+                max_tokens: 2000
+            }
         });
         this.history = {};
     }
