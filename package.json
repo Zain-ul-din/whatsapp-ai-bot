@@ -5,8 +5,10 @@
     "license": "MIT",
     "scripts": {
         "dev": "vite-node ./src/index.ts",
+        "start": "vite-node ./src/index.ts",
         "format": "prettier --write ./src",
-        "test": "vite-node ./test/index.test.ts"
+        "test": "vite-node ./test/index.test.ts",
+        "build": "npx yarn"
     },
     "devDependencies": {
         "@types/node": "^18.14.0",
