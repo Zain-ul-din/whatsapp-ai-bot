@@ -122,23 +122,19 @@ func run_bot() {
 
 	defer dot_env.Close()
 
-	// install dependencies
-	install_res := runCommandWithProgress("npx", "yarn")
-	if install_res != nil {
-		println("Error: fail to run 'npx yarn' ", install_res.Error())
-	}
-
 	// Setup Guide
 	pwd, _ := os.Getwd()
 	println("\n=== Whatsapp AI Bot Ready To Run ===")
-	println("\r - To run next time go to 'whatsapp-ai-bot-master' folder & run setup.sh")
+	println("\r - To run next time go to 'whatsapp-ai-bot-master' folder & run setup.exe")
 	println("\r OR ")
-	println("\r - copy & paste following code in command prompt\n   cd " + pwd + " && npx yarn dev\n\n")
+	println("\r - copy & paste following code in command prompt\n   pushd D: && cd " + pwd + " && npx yarn dev\n\n")
 
 	// run bot
-	run_res := runCommandWithProgress("npx", "yarn", "dev")
-	if run_res != nil {
-		println("Error: Fail to run 'npx yarn dev' ", run_res.Error())
+
+	run_cmd := exec.Command("powershell", "-command", "start", "./setup.exe")
+	_, run_err := run_cmd.Output()
+	if run_err != nil {
+		println("Error: fail to open 'setup.exe' Go to whatsapp-ai-bot-master and open setup.exe to run the bot")
 	}
 }
 
@@ -184,9 +180,6 @@ func main() {
 	}
 
 	run_bot()
-
-	// pause
-	fmt.Scanln()
 
 	defer os.Remove("./node-setup.msi")
 	defer os.Remove("./whatsapp-ai-bot.zip")
