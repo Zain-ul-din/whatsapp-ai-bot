@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+
+	"github.com/sqweek/dialog"
 )
 
 func downloadFile(filepath string, url string) (err error) {
@@ -53,29 +55,6 @@ func install_nodejs() {
 	}
 }
 
-func runCommandWithProgress(command string, args ...string) error {
-	// Create a new command
-	cmd := exec.Command(command, args...)
-
-	// Redirect standard output and standard error to our program's streams
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	// Start the command
-	err := cmd.Start()
-	if err != nil {
-		return err
-	}
-
-	// Wait for the command to complete
-	err = cmd.Wait()
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func load_url(url string) {
 	_, err := exec.Command("powershell", "-command", "start", url).Output()
 	if err != nil {
@@ -98,14 +77,18 @@ func run_bot() {
 	open_ai_url := "https://platform.openai.com/account/api-keys"
 	stability_ai_url := "https://platform.stability.ai/docs/getting-started/authentication"
 
-	fmt.Println("\nGet OpenAi API Key from " + open_ai_url)
-	load_url(open_ai_url)
+	if dialog.Message("Open Browser to Get OPEN AI API KEY ").YesNo() {
+		fmt.Println("\nGet OpenAi API Key from " + open_ai_url)
+		load_url(open_ai_url)
+	}
 
 	print("Enter OpenAI API Key OR enter NONE to skip _ ")
 	fmt.Scan(&open_ai_api_key)
 
-	fmt.Println("\nGet StabilityAI API Key from " + stability_ai_url)
-	exec.Command("start", open_ai_url)
+	if dialog.Message("Open Browser to Get StabilityAI API KEY ").YesNo() {
+		fmt.Println("\nGet StabilityAI API Key from " + stability_ai_url)
+		load_url(stability_ai_url)
+	}
 
 	print("Enter StabilityAI API Key OR enter NONE to skip _ ")
 	fmt.Scan(&stability_ai_api_key)
@@ -119,8 +102,7 @@ func run_bot() {
 	}
 
 	dot_env.WriteString("OPENAI_API_KEY=" + open_ai_api_key + "\nDREAMSTUDIO_API_KEY=" + stability_ai_api_key)
-
-	defer dot_env.Close()
+	dot_env.Close()
 
 	// Setup Guide
 	pwd, _ := os.Getwd()
@@ -128,6 +110,11 @@ func run_bot() {
 	println("\r - To run next time go to 'whatsapp-ai-bot-master' folder & run setup.exe")
 	println("\r OR ")
 	println("\r - copy & paste following code in command prompt\n   pushd D: && cd " + pwd + " && npx yarn dev\n\n")
+
+	// clean up directories
+
+	os.Remove("../node-setup.msi")
+	os.Remove("../whatsapp-ai-bot.zip")
 
 	// run bot
 
@@ -180,7 +167,27 @@ func main() {
 	}
 
 	run_bot()
-
-	defer os.Remove("./node-setup.msi")
-	defer os.Remove("./whatsapp-ai-bot.zip")
 }
+
+// func runCommandWithProgress(command string, args ...string) error {
+// 	// Create a new command
+// 	cmd := exec.Command(command, args...)
+
+// 	// Redirect standard output and standard error to our program's streams
+// 	cmd.Stdout = os.Stdout
+// 	cmd.Stderr = os.Stderr
+
+// 	// Start the command
+// 	err := cmd.Start()
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	// Wait for the command to complete
+// 	err = cmd.Wait()
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	return nil
+// }
