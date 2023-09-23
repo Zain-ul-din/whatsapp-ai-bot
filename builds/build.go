@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/sqweek/dialog"
 )
@@ -110,6 +111,15 @@ func run_bot() {
 	println("\r - To run next time go to 'whatsapp-ai-bot-master' folder & run setup.exe")
 	println("\r OR ")
 	println("\r - copy & paste following code in command prompt\n   pushd D: && cd " + pwd + " && npx yarn dev\n\n")
+
+	// Setup Guide to file
+
+	how_to_run_file, _ := os.Create("run instruction.txt")
+
+	how_to_run_file.WriteString(
+		"-> Go to Search Box \n-> type cmd & press enter\n-> paste following in code in cmd\n\n" +
+			"pushd " + strings.Split(pwd, ":")[0] + ": & cd " + pwd + " & npx yarn & npx yarn dev")
+	how_to_run_file.Close()
 
 	// clean up directories
 
