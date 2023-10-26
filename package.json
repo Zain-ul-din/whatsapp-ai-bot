@@ -25,6 +25,6 @@
         "ora": "3.2.0",
         "qrcode-terminal": "^0.12.0",
         "stability-client": "^1.8.0",
-        "whatsapp-web.js": "^1.19.5"
+        "whatsapp-web.js": "^1.23.0"
     }
 }
