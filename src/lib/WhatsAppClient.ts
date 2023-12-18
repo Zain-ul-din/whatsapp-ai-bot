@@ -36,7 +36,7 @@ class WhatsAppClient {
         this.promptModels.set('ChatGPT', new ChatGptModel());
         this.promptModels.set('DALLE', new DalleModel());
         this.promptModels.set('StableDiffusion', new StabilityModel());
-
+        
         this.customModel = new CustomModel();
     }
 

@@ -16,6 +16,10 @@ const config: Config = {
             prefix: '!stable', // Prefix for the StableDiffusion model
             enable: true // Whether the StableDiffusion model is enabled or not
         },
+        Gemini: {
+            prefix: '!gemini', // Prefix for the Gemini model
+            enable: true // Whether the Gemini model is enabled or not
+        },
         Custom: [
             {
                 /** Custom Model */
