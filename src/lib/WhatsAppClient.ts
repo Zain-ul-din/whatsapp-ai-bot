@@ -22,6 +22,7 @@ import { Util } from '../util/Util';
 // hooks
 import { useSpinner } from '../hooks/useSpinner';
 import { IModelConfig } from '../types/Config';
+import { GeminiVisionModel } from '../models/GeminiVisionModel';
 
 class WhatsAppClient {
     public constructor() {
@@ -31,13 +32,14 @@ class WhatsAppClient {
             }
         });
 
-        this.promptModels = new Map<AiModels, AiModel<string>>();
+        this.aiModels = new Map<AiModels, AiModel<string>>();
 
         // init models
-        this.promptModels.set('ChatGPT', new ChatGptModel());
-        this.promptModels.set('DALLE', new DalleModel());
-        this.promptModels.set('StableDiffusion', new StabilityModel());
-        this.promptModels.set('Gemini', new GeminiModel());
+        this.aiModels.set('ChatGPT', new ChatGptModel());
+        this.aiModels.set('DALLE', new DalleModel());
+        this.aiModels.set('StableDiffusion', new StabilityModel());
+        this.aiModels.set('Gemini', new GeminiModel());
+        this.aiModels.set('GeminiVision', new GeminiVisionModel());
         
         this.customModel = new CustomModel();
     }
@@ -71,10 +73,29 @@ class WhatsAppClient {
     private async onMessage(message: Message) {
         const msgStr = message.body;
 
-        if (msgStr.length == 0 || message.hasMedia) return;
-        
-        const modelToUse = Util.getModelByPrefix(msgStr);
 
+        if (msgStr.length == 0) return;
+        
+        const modelToUse = Util.getModelByPrefix(msgStr) as AiModels;
+
+        // media
+        if(message.hasMedia) {
+            
+            if(
+                modelToUse === undefined ||
+                this.aiModels.get(modelToUse)?.modelType !== "Image"
+            ) return;
+
+            const model: IModelConfig = config.models[modelToUse] as IModelConfig;
+            
+            this.aiModels
+                .get(modelToUse)
+                ?.sendMessage(msgStr.replace(model.prefix, ''), message);
+
+            return;
+        }
+
+        
         // message without prefix
         if (modelToUse == undefined && !config.enablePrefix.enable) {
             this.sendMessage(msgStr, message, config.enablePrefix.defaultModel);
@@ -84,9 +105,9 @@ class WhatsAppClient {
         if (modelToUse == undefined) return; // no models added
 
         // message with prefix
-        if (this.promptModels.get(modelToUse)) {
-            const model: IModelConfig = config.models[modelToUse as AiModels] as IModelConfig;
-            this.promptModels
+        if (this.aiModels.get(modelToUse)) {
+            const model: IModelConfig = config.models[modelToUse] as IModelConfig;
+            this.aiModels
                 .get(modelToUse)
                 ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
@@ -102,9 +123,9 @@ class WhatsAppClient {
     }
 
     public async sendMessage(msgStr: string, message: Message, modelName: string) {
-        if (this.promptModels.get(modelName as AiModels)) {
+        if (this.aiModels.get(modelName as AiModels)) {
             const model: IModelConfig = config.models[modelName as AiModels] as IModelConfig;
-            this.promptModels
+            this.aiModels
                 .get(modelName as AiModels)
                 ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
@@ -115,7 +136,7 @@ class WhatsAppClient {
     private client;
 
     // models require prompt to generate output
-    private promptModels: Map<AiModels, AiModel<string>>;
+    private aiModels: Map<AiModels, AiModel<string>>;
     private customModel: CustomModel;
 
     // Helper functions
