@@ -14,6 +14,7 @@ import { ChatGptModel } from '../models/ChatGptModel';
 import { StabilityModel } from '../models/StabilityModel';
 import { DalleModel } from '../models/DalleModel';
 import { CustomModel } from '../models/CustomModel';
+import { GeminiModel } from '../models/GeminiModel';
 
 // utilities
 import { Util } from '../util/Util';
@@ -36,6 +37,7 @@ class WhatsAppClient {
         this.promptModels.set('ChatGPT', new ChatGptModel());
         this.promptModels.set('DALLE', new DalleModel());
         this.promptModels.set('StableDiffusion', new StabilityModel());
+        this.promptModels.set('Gemini', new GeminiModel());
         
         this.customModel = new CustomModel();
     }
@@ -70,7 +72,7 @@ class WhatsAppClient {
         const msgStr = message.body;
 
         if (msgStr.length == 0 || message.hasMedia) return;
-
+        
         const modelToUse = Util.getModelByPrefix(msgStr);
 
         // message without prefix

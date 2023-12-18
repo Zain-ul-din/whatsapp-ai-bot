@@ -138,6 +138,11 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.19.tgz#8cfaf2ff603e9aabb910e9c0558c26cf32744061"
   integrity sha512-lAhycmKnVOuRYNtRtatQR1LPQf2oYCkRGkSFnseDAKPl8lu5SOsK/e1sXe5a0Pc5kHIHe6P2I/ilntNv2xf3cA==
 
+"@google/generative-ai@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.1.2.tgz#0681b20f25799286fdefcc2791cdb8c50bbf5924"
+  integrity sha512-54easvKJpqnsW48LcplF/8bnLKvXeYe34rfMMdgqMVZEQmLOLEKZvbif4mFmyVwoMg1/6MPLwD703RLuSJKLJw==
+
 "@improbable-eng/grpc-web-node-http-transport@^0.15.0":
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/@improbable-eng/grpc-web-node-http-transport/-/grpc-web-node-http-transport-0.15.0.tgz#5a064472ef43489cbd075a91fb831c2abeb09d68"
