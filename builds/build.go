@@ -74,9 +74,19 @@ func run_bot() {
 
 	var open_ai_api_key string
 	var stability_ai_api_key string
+	var gemini_ai_api_key string
 
 	open_ai_url := "https://platform.openai.com/account/api-keys"
 	stability_ai_url := "https://platform.stability.ai/docs/getting-started/authentication"
+	gemini_ai_url := "https://makersuite.google.com/app/apikey"
+
+	if dialog.Message("Open Browser to Get Gemini API KEY").YesNo() {
+		fmt.Println("\n Get Gemini API key from " + gemini_ai_url)
+		load_url(gemini_ai_url)
+	}
+
+	print("Enter Gemini API Key OR enter NONE to skip _ ")
+	fmt.Scan(&gemini_ai_api_key)
 
 	if dialog.Message("Open Browser to Get OPEN AI API KEY ").YesNo() {
 		fmt.Println("\nGet OpenAi API Key from " + open_ai_url)
@@ -102,7 +112,7 @@ func run_bot() {
 		println("Error: Fail to create .env file ", dot_env_err.Error())
 	}
 
-	dot_env.WriteString("OPENAI_API_KEY=" + open_ai_api_key + "\nDREAMSTUDIO_API_KEY=" + stability_ai_api_key)
+	dot_env.WriteString("GEMINI_API_KEY" + gemini_ai_api_key + "\nOPENAI_API_KEY=" + open_ai_api_key + "\nDREAMSTUDIO_API_KEY=" + stability_ai_api_key)
 	dot_env.Close()
 
 	// Setup Guide
@@ -178,26 +188,3 @@ func main() {
 
 	run_bot()
 }
-
-// func runCommandWithProgress(command string, args ...string) error {
-// 	// Create a new command
-// 	cmd := exec.Command(command, args...)
-
-// 	// Redirect standard output and standard error to our program's streams
-// 	cmd.Stdout = os.Stdout
-// 	cmd.Stderr = os.Stderr
-
-// 	// Start the command
-// 	err := cmd.Start()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	// Wait for the command to complete
-// 	err = cmd.Wait()
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	return nil
-// }
