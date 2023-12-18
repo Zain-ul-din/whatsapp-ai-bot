@@ -5,7 +5,7 @@
 ![Banner (1)](https://user-images.githubusercontent.com/78583049/222102919-9d09417d-7e44-4efd-b482-f5893c7bc5f6.png)
 
 
-### The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
+### The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
 
 
 ### Tutorials
@@ -52,7 +52,7 @@
 
 # Features
 - Generate text responses to user input using various AI models.
-- Support for GPT, DALL-E, StabilityAI, and other models via API integration.
+- Support for GPT, Gemini, DALL-E, StabilityAI, and other models via API integration.
 - Easy-to-use API for creating custom AI models and integrating with the bot.
 - Integration with WhatsApp for easy deployment and messaging.
 
@@ -80,6 +80,7 @@
 
 **2. Get API Keys**
 
+- [Gemini API Key](https://makersuite.google.com/app/apikey)
 - [OpenAI API Key](https://platform.openai.com/account/api-keys)
 - [StabilityAI API Key](https://platform.stability.ai/docs/getting-started/authentication)
 
@@ -91,6 +92,7 @@
 ```.env
  OPENAI_API_KEY=YOUR_OPEN_AI_API_KEY
  DREAMSTUDIO_API_KEY=YOUR_STABILITY_AI_API_KEY
+ GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 ```
 
 **4. Run the code**
@@ -101,6 +103,8 @@
 
 **Default Prefix**
 
+- `!gemini` use gemini.
+- `!gemini-vision` use `gemini-pro-vision` model for images
 - `!chatgpt` use chat-gpt.
 - `!dalle` use Dalle.
 - `!stable` use Stability AI.
