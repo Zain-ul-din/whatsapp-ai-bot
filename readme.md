@@ -8,25 +8,6 @@
 ### The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
 
 
-### Tutorials
-- **[Setup bot on cloud using Github code-spaces](https://www.youtube.com/watch?v=QahJSi6Ygj4)**
-- **[setup bot on a local machine](https://www.youtube.com/watch?v=fyPD3ILFPck)**
-
-### Installation
-
-- [Download For Windows](https://github.com/Zain-ul-din/whatsapp-ai-bot/raw/master/builds/whatsapp-ai-bot_windows.exe)
-
-
-### FQA
-
-- [How to create custom model](https://github.com/Zain-ul-din/whatsapp-ai-bot/issues/3)
-
-### Deployment
-
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Zain-ul-din/whatsapp-ai-bot)
-
-
 
 # Table of Content
 
@@ -34,6 +15,7 @@
 - [Features.](#features)
 - [Requirements.](#requirements)
 - [Usage.](#usage)
+- [Tutorials.](#Tutorials)
 - [Docs.](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
 - [Disclaimer.](#disclaimer)
 - [Contributors.](#contributors)
@@ -118,6 +100,21 @@
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
 [Docs Link](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
+
+# Tutorials
+
+- **[Setup bot on cloud using Github code-spaces](https://www.youtube.com/watch?v=QahJSi6Ygj4)**
+- **[setup bot on a local machine](https://www.youtube.com/watch?v=fyPD3ILFPck)**
+
+### Installation
+
+- [Download For Windows](https://github.com/Zain-ul-din/whatsapp-ai-bot/raw/master/builds/whatsapp-ai-bot_windows.exe)
+
+
+### FQA
+
+- [How to create custom model](https://github.com/Zain-ul-din/whatsapp-ai-bot/issues/3)
+
 
 # Disclaimer
 
