@@ -41,6 +41,11 @@
 
 # Demo
 
+**Gemini**
+
+[![Screenshot (1186)](https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/b6f256de-c792-4947-bf65-401a60a0b1f4)](https://www.youtube.com/watch?v=dXDxTQQqeq8)
+
+
 **Stability AI + Chat-GPT**
 
 ![image](https://user-images.githubusercontent.com/78583049/222071673-ef0f2021-a8b4-4263-9304-a77ecd76c0a1.png)
