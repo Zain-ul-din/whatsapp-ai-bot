@@ -1,5 +1,5 @@
 <div align="center">
-<h1>WhatsApp AI Bot</h1>
+<h1>WhatsApp AI Bot 🚀</h1>
 </div>
 
 ![Banner (1)](https://user-images.githubusercontent.com/78583049/222102919-9d09417d-7e44-4efd-b482-f5893c7bc5f6.png)
