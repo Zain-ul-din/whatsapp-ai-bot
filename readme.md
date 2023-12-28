@@ -12,8 +12,6 @@
 # Table of Content
 
 - [Demo.](#demo)
-- [Features.](#features)
-- [Requirements.](#requirements)
 - [Usage.](#usage)
 - [Tutorials.](#Tutorials)
 - [Docs.](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
@@ -35,20 +33,6 @@
 **Dalle + Custom Model** 
 
 ![image](https://user-images.githubusercontent.com/78583049/222074174-55792d13-5137-4c1c-b708-3ad188ca8d8d.png)
-
-
-# Features
-- Generate text responses to user input using various AI models.
-- Support for GPT, Gemini, DALL-E, StabilityAI, and other models via API integration.
-- Easy-to-use API for creating custom AI models and integrating with the bot.
-- Integration with WhatsApp for easy deployment and messaging.
-
-# Requirements
-
-- Node.js (18 or newer)
-- A recent version of yarn.
-- An OpenAI API and StabilityAI API key. 
-- A WhatsApp account.
 
 
 # Usage
