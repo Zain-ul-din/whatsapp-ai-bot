@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"strings"
 
 	"github.com/sqweek/dialog"
 )
@@ -65,9 +64,10 @@ func load_url(url string) {
 
 func run_bot() {
 
-	cdir_err := os.Chdir("./whatsapp-ai-bot-master")
+	cdir_err := os.Chdir("./whatsapp-ai-bot-sockets")
+
 	if cdir_err != nil {
-		println("Fail to change directory '/whatsapp-ai-bot-master'")
+		println("Fail to change directory './whatsapp-ai-bot-sockets'")
 	}
 
 	// input keys
@@ -115,22 +115,6 @@ func run_bot() {
 	dot_env.WriteString("GEMINI_API_KEY" + gemini_ai_api_key + "\nOPENAI_API_KEY=" + open_ai_api_key + "\nDREAMSTUDIO_API_KEY=" + stability_ai_api_key)
 	dot_env.Close()
 
-	// Setup Guide
-	pwd, _ := os.Getwd()
-	println("\n=== Whatsapp AI Bot Ready To Run ===")
-	println("\r - To run next time go to 'whatsapp-ai-bot-master' folder & run setup.exe")
-	println("\r OR ")
-	println("\r - copy & paste following code in command prompt\n   pushd D: && cd " + pwd + " && npx yarn dev\n\n")
-
-	// Setup Guide to file
-
-	how_to_run_file, _ := os.Create("run instruction.txt")
-
-	how_to_run_file.WriteString(
-		"-> Go to Search Box \n-> type cmd & press enter\n-> paste following in code in cmd\n\n" +
-			"pushd " + strings.Split(pwd, ":")[0] + ": & cd " + pwd + " & npx yarn & npx yarn dev")
-	how_to_run_file.Close()
-
 	// clean up directories
 
 	os.Remove("../node-setup.msi")
@@ -164,7 +148,8 @@ func main() {
 	}
 
 	fmt.Println("Downloading Github Repo ...")
-	repo_url := "https://github.com/Zain-ul-din/whatsapp-ai-bot/archive/refs/heads/master.zip"
+	// experimental branch socket
+	repo_url := "https://github.com/Zain-ul-din/whatsapp-ai-bot/archive/refs/heads/sockets.zip"
 	download_res := downloadFile("whatsapp-ai-bot.zip", repo_url)
 	if download_res != nil {
 		println("Error: Fail to clone github repo from " + repo_url)
