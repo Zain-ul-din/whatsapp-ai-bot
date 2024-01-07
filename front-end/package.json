@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^5.12.8",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^10.17.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "react-qr-code": "^2.0.12",
     "socket.io-client": "^4.7.3"
   },
   "devDependencies": {
