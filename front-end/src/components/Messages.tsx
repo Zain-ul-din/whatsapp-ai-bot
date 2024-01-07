@@ -8,7 +8,11 @@ const Messages = () => {
   if (authState.authState === 'loading') return <QrCode />;
   if (authState.authState === 'loading_chat') return <MessagesSkelton />;
 
-  return <Flex>Use Authenticated</Flex>;
+  return (
+    <Flex justifyContent={'center'} alignItems={'center'} h={'100%'}>
+      <Heading size={'xl'}>✔ Bot is ready to Go!</Heading>
+    </Flex>
+  );
 };
 
 const MessagesSkelton = () => {

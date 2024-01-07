@@ -5,7 +5,7 @@ import Messages from './components/Messages';
 export default function App() {
   return (
     <Flex w={'100%'} minH={'100%'} height={'100%'} display={'flex'}>
-      <Grid templateColumns={'20% 50% 30%'} w={'100%'} h={'100%'}>
+      <Grid templateColumns={'25% 50% 25%'} w={'100%'} h={'100%'}>
         <GridItem w="100%" h="100%" borderRight={'1px'} borderColor={'gray.200'} boxShadow={'lg'}>
           <Header />
         </GridItem>
