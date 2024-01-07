@@ -24,6 +24,8 @@ import { useSpinner } from '../hooks/useSpinner';
 import { IModelConfig } from '../types/Config';
 import { GeminiVisionModel } from '../models/GeminiVisionModel';
 
+import {  emitAuthState, emitQrCode } from '../server';
+
 class WhatsAppClient {
     public constructor() {
         this.client = new Client({
@@ -53,19 +55,31 @@ class WhatsAppClient {
         const spinner = useSpinner('Whats App Client | generating QR Code... \n');
         spinner.start();
         this.client
-            .on('qr', (qr) => {
-                WhatsAppClient.generateQrCode(qr);
-                spinner.succeed(`QR has been generated! | Scan QR Code with you're mobile.`);
-            })
-            .on('auth_failure', (message) => spinner.fail(`Authentication fail ${message}`))
-            .on('authenticated', () => spinner.succeed('User Authenticated!'))
-            .on('loading_screen', () => spinner.start('loading chat... \n'))
-            .on('ready', () => spinner.succeed('Client is ready | All set!'))
-            // arrow function to prevent this binding
-            .on('message', async (msg) => this.onMessage(msg))
-            .on('message_create', async (msg) => this.onSelfMessage(msg));
+        .on('qr', (qr) => {
+            emitQrCode(qr);
+            WhatsAppClient.generateQrCode(qr);
+            spinner.succeed(`QR has been generated! | Scan QR Code with you're mobile.`);
+        })
+        .on('auth_failure', (message) => {
+            emitAuthState("fail")
+            spinner.fail(`Authentication fail ${message}`)
+        })
+        .on('authenticated', () => {
+            emitAuthState("succeed")
+            spinner.succeed('User Authenticated!') 
+        })
+        .on('loading_screen', () => {
+            emitAuthState("loading_chat")
+            spinner.start('loading chat... \n')
+        })
+        .on('ready', () => { 
+            emitAuthState("ready")
+            spinner.succeed('Client is ready | All set!')
+        })
+        .on('message', async (msg) => this.onMessage(msg))
+        .on('message_create', async (msg) => this.onSelfMessage(msg));
     }
-
+    
     private static generateQrCode(qr: string) {
         QRCode.generate(qr, { small: true });
     }
