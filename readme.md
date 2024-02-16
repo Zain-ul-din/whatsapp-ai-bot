@@ -2,10 +2,7 @@
 <h1>WhatsApp AI Bot 🚀</h1>
 </div>
 
-![Banner (1)](https://user-images.githubusercontent.com/78583049/222102919-9d09417d-7e44-4efd-b482-f5893c7bc5f6.png)
-
-
-### The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
 
 ### [🧪 Experimental! Download for Windows](https://linklift.vercel.app/analytics?redirect_to=https%3A%2F%2Fgithub.com%2FZain-ul-din%2Fwhatsapp-ai-bot%2Fraw%2Fsockets%2Fbuilds%2Fwhatsapp-ai-bot_windows.exe&report_to=659aa96996aea28741392107&event_name=read_me)
 
