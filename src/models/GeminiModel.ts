@@ -38,7 +38,7 @@ class GeminiModel extends AiModel<string> {
             spinner.fail(
                 MessageTemplates.reqFailStr(
                     this.aiModelName,
-                    'at ChatGptModel.ts sendMessage(prompt, msg)',
+                    'at GeminiModel.ts sendMessage(prompt, msg)',
                     err
                 )
             );
