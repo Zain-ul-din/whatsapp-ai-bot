@@ -16,7 +16,7 @@ export interface IModelType extends IModelConfig {
 export interface IDefaultConfig {
     enable?: boolean;
     /** default model to use when prefix is disabled*/
-    defaultModel: AiModelsName;
+    defaultModel: AiModels;
 }
 
 export type Config = {

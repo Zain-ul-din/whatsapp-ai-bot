@@ -71,9 +71,9 @@ class CustomModel extends AiModel<CustomModelProps> {
     private static getCustomModel(modelName: string): IModelType | undefined {
         if (!config.models.Custom) return undefined;
         for (let model of config.models.Custom) if (model.modelName == modelName) return model;
-        return undefined;
+        return config.models.Custom[0];
     }
-
+    
     private static async readContext(model: IModelType) {
         const supportedFiles = ['.txt', '.text', '.md'];
         const httpProtocols = [
