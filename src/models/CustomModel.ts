@@ -1,11 +1,7 @@
 import { AiModel } from './AiModel';
-import { ChatGPTAPI } from 'chatgpt';
-import type { SendMessageOptions, ChatMessage } from 'chatgpt';
 import type { Message } from 'whatsapp-web.js';
 import { useSpinner } from '../hooks/useSpinner';
 import { MessageTemplates } from '../util/MessageTemplates';
-
-import { ENV } from '../lib/env';
 
 // config file
 import config from '../whatsapp-ai.config';
@@ -13,28 +9,24 @@ import { IModelType } from '../types/Config';
 
 import fetch from 'node-fetch';
 import { readFile } from 'fs/promises';
+import { AiModelsName } from '../types/AiModels';
 
-export type CustomModelProps = { prompt: string; modelName: string };
+export type CustomModelProps = { 
+    prompt: string; modelName: string,
+    resolve: (model: AiModelsName, prompt: string)=> Promise<void>
+};
 
 class CustomModel extends AiModel<CustomModelProps> {
     public constructor() {
-        super(ENV.openAIKey, 'Custom');
-        this.client = new ChatGPTAPI({
-            apiKey: this.apiKey,
-            completionParams: {
-                model: config.chatGPTModel,
-                max_tokens: 2000
-            } 
-        });
-        this.history = {};
+        super('', 'Custom')
     }
     
-    public async sendMessage({ prompt, modelName }: CustomModelProps, msg: Message): Promise<void> {
+    public async sendMessage({ prompt, modelName, resolve }: CustomModelProps, msg: Message): Promise<void> {
         const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, msg.from, prompt));
-        spinner.start();
 
         try {
             const customModel = CustomModel.getCustomModel(modelName);
+            
             if (!customModel) return;
             
             let sender = ''
@@ -44,30 +36,14 @@ class CustomModel extends AiModel<CustomModelProps> {
                 sender = `sender: ${chat.name}`;
             }
             
-            const startTime = Date.now();
-
             const contextPrompt = CustomModel.createContext(
                 await CustomModel.readContext(customModel),
                 prompt.replace(customModel.prefix, ''),
                 sender
             );
-
-            const aiRes = await this.client.sendMessage(contextPrompt, this.history[msg.from]);
-
-            this.history[msg.from as keyof SendMessageOptions] = {
-                conversationId: aiRes.conversationId,
-                parentMessageId: aiRes.id
-            };
             
-            msg.reply(aiRes.text);
-            spinner.succeed(
-                MessageTemplates.reqSucceedStr(
-                    this.aiModelName,
-                    msg.from,
-                    aiRes.text,
-                    Date.now() - startTime
-                )
-            );
+            resolve(customModel.modelToUse || 'Gemini', contextPrompt);
+
         } catch (err) {
             spinner.fail(
                 MessageTemplates.reqFailStr(
@@ -127,9 +103,6 @@ class CustomModel extends AiModel<CustomModelProps> {
         // plane text
         return model.context;
     }
-
-    private client;
-    private history: { [from: string]: SendMessageOptions };
 }
 
 export { CustomModel };

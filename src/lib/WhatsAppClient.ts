@@ -112,10 +112,15 @@ class WhatsAppClient {
                 ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
             // use custom model
-            this.customModel.sendMessage({ prompt: msgStr, modelName: modelToUse }, message);
+            this.customModel.sendMessage({ prompt: msgStr, modelName: modelToUse, 
+                resolve: async (model, contextPrompt)=>{
+                    this.aiModels
+                    .get(model)?.sendMessage(contextPrompt, message);
+                }
+            }, message);
         }
     }
-
+    
     private async onSelfMessage(message: Message) {
         if (!message.fromMe) return;  
         if (message.hasQuotedMsg && !Util.getModelByPrefix (message.body)) return;
@@ -129,7 +134,12 @@ class WhatsAppClient {
                 .get(modelName as AiModels)
                 ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
-            this.customModel.sendMessage({ prompt: msgStr, modelName }, message);
+            this.customModel.sendMessage({ prompt: msgStr, modelName, 
+                resolve: async (model, contextPrompt)=>{
+                    this.aiModels
+                    .get(model)?.sendMessage(contextPrompt, message);
+                }
+            }, message);
         }
     }
     

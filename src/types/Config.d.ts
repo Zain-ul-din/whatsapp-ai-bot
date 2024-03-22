@@ -9,6 +9,7 @@ export interface IModelType extends IModelConfig {
     modelName: string;
     prefix: string;
     context: string;
+    modelToUse?: AiModelsName;
     includeSender?: boolean
 }
 
