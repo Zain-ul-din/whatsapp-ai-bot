@@ -26,9 +26,14 @@ import { GeminiVisionModel } from '../models/GeminiVisionModel';
 
 class WhatsAppClient {
     public constructor() {
+        const wwebVersion = '2.2407.3';
         this.client = new Client({
             puppeteer: {
                 args: ['--no-sandbox']
+            },
+            webVersionCache: {
+                type: 'remote',
+                remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
             }
         });
 
