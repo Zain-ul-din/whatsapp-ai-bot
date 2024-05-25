@@ -26,7 +26,7 @@ import { GeminiVisionModel } from '../models/GeminiVisionModel';
 
 class WhatsAppClient {
     public constructor() {
-        const wwebVersion = '2.2407.3';
+        const wwebVersion = '2.2412.54';
         this.client = new Client({
             puppeteer: {
                 args: ['--no-sandbox']
