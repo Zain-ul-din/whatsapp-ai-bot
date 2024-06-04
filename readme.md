@@ -146,11 +146,11 @@ A big thank you to these people for supporting this project.
  <tbody>
    <tr>
     <td align="center">
-     <a href="https://github.com/levitco">Levitco</a>
+     <a target="_blank" href="https://github.com/levitco">Levitco</a>
     💎
     </td>
     <td align="center">
-     YOU?
+    <a target="_blank" href="https://www.buymeacoffee.com/zainuldin">YOU?</a>
     </td>
    </tr>
  </tbody>
