@@ -25,7 +25,9 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - [Docs.](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
 - [Disclaimer.](#disclaimer)
 - [Contributors.](#contributors)
+- [Sponsors](#Sponsors)
 - [About.](#about-us)
+
 
 # Demo
 
@@ -125,6 +127,34 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 - [Ask Question here](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/discussions)
 
 <!-- about -->
+
+## Sponsors
+
+A big thank you to these people for supporting this project.
+
+<table>
+ <thead>
+  <tr>
+   <th>
+    <img src="https://avatars.githubusercontent.com/u/47256157?v=4" width="150" height="150"/>
+   </th>
+   <th>
+    <img src="https://avatars.githubusercontent.com/u/0?v=4" width="150" height="150"/>
+   </th>
+  </tr>
+ </thead>
+ <tbody>
+   <tr>
+    <td align="center">
+     <a href="https://github.com/levitco">Levitco</a>
+    💎
+    </td>
+    <td align="center">
+     YOU?
+    </td>
+   </tr>
+ </tbody>
+</table>
 
 ## About Us
 
