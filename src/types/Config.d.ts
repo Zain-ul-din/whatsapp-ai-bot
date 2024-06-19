@@ -10,7 +10,7 @@ export interface IModelType extends IModelConfig {
     prefix: string;
     context: string;
     modelToUse?: AiModelsName;
-    includeSender?: boolean
+    includeSender?: boolean;
 }
 
 export interface IDefaultConfig {
@@ -25,5 +25,9 @@ export type Config = {
     };
 } & {
     enablePrefix: IDefaultConfig;
-    chatGPTModel: string
+    sessionStorage: {
+        enable: boolean;
+        wwjsPath: string;
+    };
+    chatGPTModel: string;
 };

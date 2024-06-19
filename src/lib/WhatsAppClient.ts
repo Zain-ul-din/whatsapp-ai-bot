@@ -1,5 +1,5 @@
 // whatsapp client
-import { Client, Message } from 'whatsapp-web.js';
+import { Client, Message, LocalAuth, AuthStrategy, NoAuth } from 'whatsapp-web.js';
 import QRCode from 'qrcode-terminal';
 
 // config file
@@ -27,10 +27,18 @@ import { GeminiVisionModel } from '../models/GeminiVisionModel';
 class WhatsAppClient {
     public constructor() {
         const wwebVersion = '2.2412.54';
+
+        const sessionStorage: AuthStrategy = config.sessionStorage.enable
+            ? new LocalAuth({
+                  dataPath: config.sessionStorage.wwjsPath
+              })
+            : new NoAuth();
+
         this.client = new Client({
             puppeteer: {
                 args: ['--no-sandbox']
             },
+            authStrategy: sessionStorage,
             webVersionCache: {
                 type: 'remote',
                 remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
@@ -55,7 +63,7 @@ class WhatsAppClient {
     }
 
     private subscribeEvents() {
-        const spinner = useSpinner('Whats App Client | generating QR Code... \n');
+        const spinner = useSpinner('Whats App Client | Starting... \n');
         spinner.start();
         this.client
             .on('qr', (qr) => {
