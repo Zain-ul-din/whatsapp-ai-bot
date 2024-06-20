@@ -30,4 +30,7 @@ export type Config = {
         wwjsPath: string;
     };
     chatGPTModel: string;
+    selfMessage: {
+        skipPrefix: boolean;
+    };
 };
