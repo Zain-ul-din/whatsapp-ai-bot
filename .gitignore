@@ -12,3 +12,6 @@
 /test
 
 /.wwebjs_cache
+
+# local session
+/session
