@@ -108,7 +108,14 @@ class WhatsAppClient {
             return;
         }
 
-        
+        const messageToSelf = message.fromMe && message.hasQuotedMsg === false && message.from === message.to;
+
+        // message to self without prefix
+        if (messageToSelf && config.selfMessage.skipPrefix) {
+            this.sendMessage(msgStr, message, config.enablePrefix.defaultModel);
+            return;
+        }
+
         // message without prefix
         if (modelToUse == undefined && !config.enablePrefix.enable) {
             this.sendMessage(msgStr, message, config.enablePrefix.defaultModel);

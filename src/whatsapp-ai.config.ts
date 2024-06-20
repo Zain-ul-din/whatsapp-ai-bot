@@ -50,6 +50,10 @@ const config: Config = {
         enable: true, // Whether session storage is enabled or not
         /** Session storage path */
         wwjsPath: './' // Path for the session storage
+    },
+    selfMessage: {
+        /** Skip prefix for self messages */
+        skipPrefix: true // Whether to skip the prefix for self messages or not
     }
 };
 
