@@ -23,6 +23,7 @@ import { Util } from '../util/Util';
 import { useSpinner } from '../hooks/useSpinner';
 import { IModelConfig } from '../types/Config';
 import { GeminiVisionModel } from '../models/GeminiVisionModel';
+import MessageEvent from './events/MessageEvent';
 
 class WhatsAppClient {
     public constructor() {
@@ -41,7 +42,7 @@ class WhatsAppClient {
             authStrategy: sessionStorage,
             webVersionCache: {
                 type: 'remote',
-                remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
+                remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`
             }
         });
 
@@ -53,8 +54,11 @@ class WhatsAppClient {
         this.aiModels.set('StableDiffusion', new StabilityModel());
         this.aiModels.set('Gemini', new GeminiModel());
         this.aiModels.set('GeminiVision', new GeminiVisionModel());
-        
+
         this.customModel = new CustomModel();
+
+        // events
+        this.messageEvent = new MessageEvent();
     }
 
     public initializeClient() {
@@ -86,29 +90,27 @@ class WhatsAppClient {
     private async onMessage(message: Message) {
         const msgStr = message.body;
 
-
         if (msgStr.length == 0) return;
-        
+
+        // emit events
+        this.messageEvent.emit(message.fromMe ? 'self' : 'incoming', message, this);
+
         const modelToUse = Util.getModelByPrefix(msgStr) as AiModels;
 
         // media
-        if(message.hasMedia) {
-            
-            if(
-                modelToUse === undefined ||
-                this.aiModels.get(modelToUse)?.modelType !== "Image"
-            ) return;
+        if (message.hasMedia) {
+            if (modelToUse === undefined || this.aiModels.get(modelToUse)?.modelType !== 'Image')
+                return;
 
             const model: IModelConfig = config.models[modelToUse] as IModelConfig;
-            
-            this.aiModels
-                .get(modelToUse)
-                ?.sendMessage(msgStr.replace(model.prefix, ''), message);
+
+            this.aiModels.get(modelToUse)?.sendMessage(msgStr.replace(model.prefix, ''), message);
 
             return;
         }
 
-        const messageToSelf = message.fromMe && message.hasQuotedMsg === false && message.from === message.to;
+        const messageToSelf =
+            message.fromMe && message.hasQuotedMsg === false && message.from === message.to;
 
         // message to self without prefix
         if (modelToUse == undefined && messageToSelf && config.selfMessage.skipPrefix) {
@@ -127,23 +129,25 @@ class WhatsAppClient {
         // message with prefix
         if (this.aiModels.get(modelToUse)) {
             const model: IModelConfig = config.models[modelToUse] as IModelConfig;
-            this.aiModels
-                .get(modelToUse)
-                ?.sendMessage(msgStr.replace(model.prefix, ''), message);
+            this.aiModels.get(modelToUse)?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
             // use custom model
-            this.customModel.sendMessage({ prompt: msgStr, modelName: modelToUse, 
-                resolve: async (model, contextPrompt)=>{
-                    this.aiModels
-                    .get(model)?.sendMessage(contextPrompt, message);
-                }
-            }, message);
+            this.customModel.sendMessage(
+                {
+                    prompt: msgStr,
+                    modelName: modelToUse,
+                    resolve: async (model, contextPrompt) => {
+                        this.aiModels.get(model)?.sendMessage(contextPrompt, message);
+                    }
+                },
+                message
+            );
         }
     }
-    
+
     private async onSelfMessage(message: Message) {
-        if (!message.fromMe) return;  
-        if (message.hasQuotedMsg && !Util.getModelByPrefix (message.body)) return;
+        if (!message.fromMe) return;
+        if (message.hasQuotedMsg && !Util.getModelByPrefix(message.body)) return;
         this.onMessage(message);
     }
 
@@ -154,23 +158,33 @@ class WhatsAppClient {
                 .get(modelName as AiModels)
                 ?.sendMessage(msgStr.replace(model.prefix, ''), message);
         } else {
-            this.customModel.sendMessage({ prompt: msgStr, modelName, 
-                resolve: async (model, contextPrompt)=>{
-                    this.aiModels
-                    .get(model)?.sendMessage(contextPrompt, message);
-                }
-            }, message);
+            this.customModel.sendMessage(
+                {
+                    prompt: msgStr,
+                    modelName,
+                    resolve: async (model, contextPrompt) => {
+                        this.aiModels.get(model)?.sendMessage(contextPrompt, message);
+                    }
+                },
+                message
+            );
         }
     }
-    
+
+    public self() {
+        return this.client;
+    }
+
     private client;
 
     // models require prompt to generate output
     private aiModels: Map<AiModels, AiModel<string>>;
     private customModel: CustomModel;
 
-    // Helper functions
+    // events
+    public messageEvent: MessageEvent;
 
+    // Helper functions
 }
 
 export { WhatsAppClient };
