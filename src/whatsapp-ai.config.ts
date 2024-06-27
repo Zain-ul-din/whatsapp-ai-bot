@@ -3,6 +3,7 @@ import { Config } from './types/Config';
 
 const config: Config = {
     chatGPTModel: 'gpt-3.5-turbo', // learn more about GPT models https://platform.openai.com/docs/models
+    sendWelcomeMessage: true, // Whether to send a welcome message to the user (located at /src/services/welcomeUser.ts)
     models: {
         ChatGPT: {
             prefix: '!chatgpt', // Prefix for the ChatGPT model

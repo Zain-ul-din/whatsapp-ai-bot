@@ -1,5 +1,6 @@
 import { Message } from 'whatsapp-web.js';
 import { WhatsAppClient } from '../lib/WhatsAppClient';
+import config from '../whatsapp-ai.config';
 
 /**
  * ensure send one message per session
@@ -24,6 +25,7 @@ for feature request and deployment: https://wa-ai-seven.vercel.app/
 `;
 
 export default function welcomeUser(msg: Message, client: WhatsAppClient) {
+    if (!config.sendWelcomeMessage) return;
     if (sended) return;
     sended = true;
     console.log(client);
