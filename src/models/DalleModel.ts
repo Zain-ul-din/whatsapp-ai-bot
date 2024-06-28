@@ -1,7 +1,7 @@
 import { Message } from 'whatsapp-web.js';
 import { AiModel } from './AiModel';
 import { useSpinner } from '../hooks/useSpinner';
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 import { MessageMedia } from 'whatsapp-web.js';
 
 import { MessageTemplates } from '../util/MessageTemplates';
@@ -10,7 +10,7 @@ import { ENV } from '../lib/env';
 class DalleModel extends AiModel<string> {
     public constructor() {
         super(ENV.openAIKey, 'DALLE');
-        this.client = new OpenAIApi(new Configuration({ apiKey: this.apiKey }));
+        this.client = new OpenAI({ apiKey: this.apiKey });
     }
 
     public async sendMessage(prompt: string, msg: Message): Promise<void> {
