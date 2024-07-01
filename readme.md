@@ -13,8 +13,6 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/6de6c68d-70a9-4409-a18b-dfe19d1b9822" width="100" height="70"/>
 </a>
 
-- [Download for Windows (🧪 Experimental)](https://linklift.vercel.app/analytics?redirect_to=https%3A%2F%2Fgithub.com%2FZain-ul-din%2Fwhatsapp-ai-bot%2Fraw%2Fsockets%2Fbuilds%2Fwhatsapp-ai-bot_windows.exe&report_to=659aa96996aea28741392107&event_name=read_me)
-
 - [Install for other platforms](#usage)
 
 # Table of Content
