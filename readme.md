@@ -9,7 +9,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 <div align="center">
 <a href="https://wa-ai-seven.vercel.app/feat-req">
- <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/0ada77bc-deba-4e69-8380-210d5528cadc" width="50%" height="50%" />
+ <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/0ada77bc-deba-4e69-8380-210d5528cadc" width="35%" height="35%" />
 </a>
 </div>
 
