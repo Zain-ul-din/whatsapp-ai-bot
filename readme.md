@@ -7,9 +7,29 @@ WhatsApp AI Bot 🚀</h1>
 
 The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
 
-<a href="https://wa-ai-seven.vercel.app/feat-req">
- <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/0ada77bc-deba-4e69-8380-210d5528cadc" width="25%" height="25%" />
-</a>
+
+ <table>
+  <thead>
+  <tr>
+   <th>♥ Sponsor</th>
+   <th>💎 Bounty</th>
+  </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td>
+     <a href="https://buymeacoffee.com/zainuldin">
+      link
+     </a>
+    </td>
+    <td>
+     <a href="https://wa-ai-seven.vercel.app/feat-req">
+      link
+     </a>
+    </td>
+   </tr>
+  </tbody>
+ </table>
 
 
 **Setup this bot:**
