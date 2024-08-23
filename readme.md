@@ -14,7 +14,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
    <th>♥ Sponsor</th>
    <th>💎 Bounty</th>
    <th>🚀 Deployment</th>
-   <th>✉ Whats App Group</th>
+   <th>✉ WhatsApp Group</th>
   </tr>
   </thead>
   <tbody>
