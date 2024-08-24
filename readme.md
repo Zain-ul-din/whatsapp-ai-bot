@@ -4,7 +4,7 @@
 - This branch is still under construction 🚧. Currently, we only support the models listed below, but support for new models will be added soon.
 ```
 
-Supported Models:
+**Supported Models:**
 
 <table>
   <thead>
@@ -23,7 +23,9 @@ Supported Models:
   </tbody>
 </table>
 
- <table align="center">
+**Useful links:**
+
+ <table>
   <thead>
   <tr>
    <th>♥ Sponsor</th>
