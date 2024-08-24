@@ -20,6 +20,11 @@
       <td align="center">Open AI</td>
       <td align="center">text</td>
     </tr>
+    <tr>
+      <td align="center">Gemini</td>
+      <td align="center">Google</td>
+      <td align="center">text</td>
+    </tr>
   </tbody>
 </table>
 
