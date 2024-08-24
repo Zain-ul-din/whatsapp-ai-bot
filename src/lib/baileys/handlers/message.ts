@@ -1,9 +1,11 @@
 import { ChatGptModel } from '../../../models/ChatGptModel';
+import { GeminiModel } from '../../../models/GeminiModel';
 import { AiModels } from '../../../types/AiModels';
 import { Util } from '../../../util/Util';
 import MessageHandlerParams from '../types';
 
 const gptModel = new ChatGptModel();
+const geminiModel = new GeminiModel();
 
 // handles message
 export async function handleMessage({ client, msg, metadata }: MessageHandlerParams) {
@@ -15,6 +17,16 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
     gptModel.sendMessage({ sender: metadata.sender, prompt: metadata.text }, async (res, err) => {
       client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
     });
+    return;
+  }
+
+  if (modelToUse === 'Gemini' && metadata.msgType === 'text') {
+    geminiModel.sendMessage(
+      { sender: metadata.sender, prompt: metadata.text },
+      async (res, err) => {
+        client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
+      }
+    );
     return;
   }
 
