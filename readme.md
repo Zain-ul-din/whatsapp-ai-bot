@@ -1,3 +1,63 @@
+```diff
++ We are switching to the @whiskeysockets/baileys library for our bot because it's lightweight and easy to deploy.
+
+- This branch is still under construction 🚧. Currently, we only support the models listed below, but support for new models will be added soon.
+```
+
+Supported Models:
+
+<table>
+  <thead>
+    <tr>
+      <th align="center">Model</th>
+      <th align="center">Provider</th>
+      <th align="center">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">Chat GPT</td>
+      <td align="center">Open AI</td>
+      <td align="center">text</td>
+    </tr>
+  </tbody>
+</table>
+
+ <table align="center">
+  <thead>
+  <tr>
+   <th>♥ Sponsor</th>
+   <th>💎 Bounty</th>
+   <th>🚀 Deployment</th>
+   <th>✉ WhatsApp Group</th>
+  </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <td align="center">
+     <a href="https://buymeacoffee.com/zainuldin">
+      link
+     </a>
+    </td>
+    <td align="center">
+     <a href="https://wa-ai-seven.vercel.app/feat-req">
+      link
+     </a>
+    </td>
+    <td align="center">
+     <a href="https://wa-ai-seven.vercel.app/">
+      link
+     </a>
+    </td>
+    <td align="center">
+     <a href="https://chat.whatsapp.com/DlVCpX2QQNx6jHQVT9IB7Z" align="center">link</a>
+    </td>
+   </tr>
+  </tbody>
+ </table>
+
+---
+
 <div align="center">
 
 <h1>
@@ -6,14 +66,6 @@ WhatsApp AI Bot 🚀</h1>
 </div>
 
 The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
-
-**Setup this bot:**
-
-<a href="https://www.youtube.com/watch?v=QahJSi6Ygj4">
- <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/6de6c68d-70a9-4409-a18b-dfe19d1b9822" width="100" height="70"/>
-</a>
-
-- [Install for other platforms](#usage)
 
 # Table of Content
 
@@ -26,22 +78,19 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - [Sponsors.](#Sponsors)
 - [About.](#about-us)
 
-
 # Demo
 
 **Gemini**
 
 [![Screenshot (1186)](https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/b6f256de-c792-4947-bf65-401a60a0b1f4)](https://www.youtube.com/watch?v=dXDxTQQqeq8)
 
-
 **Stability AI + Chat-GPT**
 
 ![image](https://user-images.githubusercontent.com/78583049/222071673-ef0f2021-a8b4-4263-9304-a77ecd76c0a1.png)
 
-**Dalle + Custom Model** 
+**Dalle + Custom Model**
 
 ![image](https://user-images.githubusercontent.com/78583049/222074174-55792d13-5137-4c1c-b708-3ad188ca8d8d.png)
-
 
 # Usage
 
@@ -56,7 +105,6 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 - [Download Zip File](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/archive/refs/heads/master.zip)
 
-
 **2. Get API Keys**
 
 - [Gemini API Key](https://makersuite.google.com/app/apikey)
@@ -68,6 +116,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - create `.env` in the root of the project.
 
 - set following fields in `.env` file
+
 ```.env
  OPENAI_API_KEY=YOUR_OPEN_AI_API_KEY
  DREAMSTUDIO_API_KEY=YOUR_STABILITY_AI_API_KEY
@@ -98,16 +147,13 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - **[Setup bot on cloud using Github code-spaces](https://www.youtube.com/watch?v=QahJSi6Ygj4)**
 - **[setup bot on a local machine](https://www.youtube.com/watch?v=fyPD3ILFPck)**
 
-
 ### FQA
 
 - [How to create custom model](https://github.com/Zain-ul-din/whatsapp-ai-bot/issues/3)
 
-
 # Disclaimer
 
 This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
-
 
 ## Contributors
 
@@ -122,7 +168,7 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 
 <!-- about -->
 
-## Sponsors 
+## Sponsors
 
 A big thank you to these people for supporting this project.
 
@@ -156,7 +202,6 @@ A big thank you to these people for supporting this project.
 <h4 font-weight="bold">This repository is maintained by <a href="https://github.com/Zain-ul-din">Zain-Ul-Din</a></h4>
 <p> Show some ❤️ by starring this awesome repository! </p>
 </div>
-
 
 <div align="center">
 <a href="https://www.buymeacoffee.com/zainuldin" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
