@@ -13,21 +13,32 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
 
   if (!modelToUse) return;
 
+  const prompt = metadata.text.split(' ').slice(1).join(' ');
+
   if (modelToUse === 'ChatGPT' && metadata.msgType === 'text') {
-    gptModel.sendMessage({ sender: metadata.sender, prompt: metadata.text }, async (res, err) => {
+    gptModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
       client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
     });
     return;
   }
 
   if (modelToUse === 'Gemini' && metadata.msgType === 'text') {
-    geminiModel.sendMessage(
-      { sender: metadata.sender, prompt: metadata.text },
-      async (res, err) => {
-        client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
-      }
-    );
+    geminiModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
+      client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
+    });
     return;
+  }
+
+  console.log('model to use: ', modelToUse);
+
+  // Generative Models
+  if (
+    modelToUse === 'GeminiVision' &&
+    metadata.msgType === 'image' &&
+    metadata.imgMetaData.caption
+  ) {
+    console.log('Using Gemini Model with prompt', metadata.imgMetaData.caption);
+    console.log('url: ', metadata.imgMetaData.url);
   }
 
   client.sendMessage(metadata.remoteJid, { text: `Hi It's WAAI BOT here 🤖` }, { quoted: msg });

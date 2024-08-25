@@ -51,7 +51,9 @@ export default async function useMessageParser(
     msgType,
     type,
     isQuoted: false,
-    timeStamp: new Date(message.messageTimestamp * 1000),
+    timeStamp: message.messageTimestamp
+      ? new Date((message.messageTimestamp as number) * 1000)
+      : new Date(),
     text: extendedTextMessage?.text || conversation || '',
     isGroup: false,
     groupMetaData: {
@@ -74,7 +76,10 @@ export default async function useMessageParser(
     metaData.msgType = 'image';
     if (imageMessage.url) metaData.imgMetaData.url = imageMessage.url;
     if (imageMessage.mimetype) metaData.imgMetaData.mimeType = imageMessage.mimetype;
-    if (imageMessage.caption) metaData.imgMetaData.caption = imageMessage.caption;
+    if (imageMessage.caption) {
+      metaData.imgMetaData.caption = imageMessage.caption;
+      metaData.text = imageMessage.caption;
+    }
   }
 
   // Handle audio messages
