@@ -18,12 +18,12 @@
     <tr>
       <td align="center">Chat GPT</td>
       <td align="center">Open AI</td>
-      <td align="center">text</td>
+      <td align="center">text to text</td>
     </tr>
     <tr>
       <td align="center">Gemini</td>
       <td align="center">Google</td>
-      <td align="center">text</td>
+      <td align="center">text to text</td>
     </tr>
   </tbody>
 </table>
