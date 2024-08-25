@@ -25,6 +25,11 @@
       <td align="center">Google</td>
       <td align="center">text to text</td>
     </tr>
+    <tr>
+      <td align="center">Gemini Vision</td>
+      <td align="center">Google</td>
+      <td align="center">image to text</td>
+    </tr>
   </tbody>
 </table>
 
