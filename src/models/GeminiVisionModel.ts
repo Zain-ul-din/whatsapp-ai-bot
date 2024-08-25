@@ -6,7 +6,7 @@ import { MessageTemplates } from '../util/MessageTemplates';
 
 interface GeminiVisionModelParams {
   sender: string;
-  prompt: { prompt: string; buffer: Buffer; mimetype: string };
+  prompt: { prompt: string; buffer: Buffer; mimeType: string };
 }
 
 type HandleType = (res: string, error?: string) => Promise<void>;
@@ -27,9 +27,9 @@ class GeminiVisionModel extends AiModel<GeminiVisionModelParams, HandleType> {
       const startTime = Date.now();
 
       // check out more at: https://ai.google.dev/tutorials/node_quickstart
-      const model = this.genAI.getGenerativeModel({ model: 'gemini-pro-vision' });
+      const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const imageParts = [this.toGenerativePart(prompt.buffer, prompt.mimetype)];
+      const imageParts = [this.toGenerativePart(prompt.buffer, prompt.mimeType)];
       const result = await model.generateContent([prompt.prompt, ...imageParts]);
       const resText = result.response.text();
 
