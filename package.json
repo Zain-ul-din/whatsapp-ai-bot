@@ -8,6 +8,7 @@
         "start": "vite-node ./src/index.ts",
         "format": "prettier --write ./src",
         "test": "vite-node ./test/index.test.ts",
+        "test:baileys": "vite-node ./baileys/index.ts",
         "build": "npx yarn"
     },
     "devDependencies": {
@@ -18,15 +19,13 @@
         "vite-node": "^0.28.5"
     },
     "dependencies": {
-        "@google/generative-ai": "^0.1.2",
+        "@google/generative-ai": "^0.17.1",
         "@types/qrcode-terminal": "^0.12.0",
-        "chatgpt": "^5.2.2",
+        "@whiskeysockets/baileys": "^6.7.7",
         "dotenv": "^16.0.3",
-        "openai": "^4.52.1",
+        "openai": "^4.56.0",
         "ora": "3.2.0",
-        "puppeteer": "^22.1.0",
         "qrcode-terminal": "^0.12.0",
-        "stability-client": "^1.8.0",
-        "whatsapp-web.js": "^1.23.0"
+        "stability-client": "^1.8.0"
     }
 }

@@ -1,62 +1,71 @@
 import { AiModel } from './AiModel';
-import { ChatGPTAPI } from 'chatgpt';
-import type { SendMessageOptions, ChatMessage } from 'chatgpt';
-import type { Message } from 'whatsapp-web.js';
 import { useSpinner } from '../hooks/useSpinner';
 import { MessageTemplates } from '../util/MessageTemplates';
 
 import { ENV } from '../lib/env';
-
 import config from '../whatsapp-ai.config';
+import OpenAI from 'openai';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
-class ChatGptModel extends AiModel<string> {
-    public constructor() {
-        super(ENV.openAIKey, 'ChatGPT');
-        this.client = new ChatGPTAPI({ 
-            apiKey: this.apiKey,
-            completionParams: {
-                model: config.chatGPTModel,
-                max_tokens: 2000
-            }
-        });
-        this.history = {};
+interface ChatGptModelParams {
+  sender: string;
+  prompt: string;
+}
+
+type HandleType = (res: string, error?: string) => Promise<void>;
+
+class ChatGptModel extends AiModel<ChatGptModelParams, HandleType> {
+  public constructor() {
+    super(ENV.openAIKey, 'ChatGPT');
+    this.openai = new OpenAI({
+      apiKey: this.apiKey
+    });
+
+    this.history = {};
+  }
+
+  public async sendMessage(
+    { prompt, sender }: ChatGptModelParams,
+    handle: HandleType
+  ): Promise<void> {
+    const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, sender, prompt));
+    spinner.start();
+    try {
+      const startTime = Date.now();
+
+      if (this.history[sender] === undefined) this.history[sender] = [];
+      this.history[sender].push({ role: 'user', content: prompt });
+
+      const completion = await this.openai.chat.completions.create({
+        messages: this.history[sender],
+        model: config.chatGPTModel
+      });
+
+      // TODO: Get Total tokens, Get finish reason
+
+      const message = completion.choices[0].message;
+      this.history[sender].push(message);
+
+      const res = message.content || '';
+      await handle(res);
+
+      spinner.succeed(
+        MessageTemplates.reqSucceedStr(this.aiModelName, sender, res, Date.now() - startTime)
+      );
+    } catch (err) {
+      spinner.fail(
+        MessageTemplates.reqFailStr(
+          this.aiModelName,
+          'at ChatGptModel.ts sendMessage(prompt, msg)',
+          err
+        )
+      );
+      await handle('', 'An error occur please see console for more information.');
     }
-    
-    public async sendMessage(prompt: string, msg: Message): Promise<void> {
-        const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, msg.from, prompt));
-        spinner.start();
-        try {
-            const startTime = Date.now();
-            const aiRes = await this.client.sendMessage(prompt, this.history[msg.from]);
+  }
 
-            this.history[msg.from as keyof SendMessageOptions] = {
-                conversationId: aiRes.conversationId,
-                parentMessageId: aiRes.id
-            };
-
-            msg.reply(aiRes.text);
-            spinner.succeed(
-                MessageTemplates.reqSucceedStr(
-                    this.aiModelName,
-                    msg.from,
-                    aiRes.text,
-                    Date.now() - startTime
-                )
-            );
-        } catch (err) {
-            spinner.fail(
-                MessageTemplates.reqFailStr(
-                    this.aiModelName,
-                    'at ChatGptModel.ts sendMessage(prompt, msg)',
-                    err
-                )
-            );
-            msg.reply('An error occur please see console for more information.');
-        }
-    }
-
-    private client;
-    private history: { [from: string]: SendMessageOptions };
+  private history: { [from: string]: ChatCompletionMessageParam[] };
+  private openai: OpenAI;
 }
 
 export { ChatGptModel };

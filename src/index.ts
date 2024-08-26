@@ -1,8 +1,11 @@
-import { WhatsAppClient } from './lib/WhatsAppClient';
-import welcomeUser from './services/welcomeUser';
+// import { WhatsAppClient } from './lib/WhatsAppClient';
+// import welcomeUser from './services/welcomeUser';
 
-console.log('🤖 starting client...');
-const whatsappClient = new WhatsAppClient();
-whatsappClient.initializeClient();
+// console.log('🤖 starting client...');
+// const whatsappClient = new WhatsAppClient();
+// whatsappClient.initializeClient();
 
-whatsappClient.messageEvent.on('self', welcomeUser);
+// whatsappClient.messageEvent.on('self', welcomeUser);
+
+import { connectToWhatsApp } from './lib/baileys';
+connectToWhatsApp();
