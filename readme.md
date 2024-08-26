@@ -1,3 +1,4 @@
+
 ```diff
 + We are switching to the @whiskeysockets/baileys library for our bot because it's lightweight and easy to deploy.
 
@@ -69,6 +70,10 @@
  </table>
 
 ---
+=======
+
+<br>
+
 
 <div align="center">
 
