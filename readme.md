@@ -1,6 +1,3 @@
-<h1 align="center">
-⚠ We are no longer maintaining this branch use <a href="https://github.com/Zain-ul-din/whatsapp-ai-bot/tree/baileys">this branch</a> instead.
-</h1>
 
 <br>
 
