@@ -5,5 +5,6 @@ export type AiModels =
   | 'Gemini'
   | 'GeminiVision'
   | 'Custom'
-  | 'DALLE3';
+  | 'DALLE3'
+  | 'FLUX';
 export type AiModelsName = Exclude<AiModels, 'Custom'>;

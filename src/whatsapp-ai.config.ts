@@ -29,6 +29,10 @@ const config: Config = {
       prefix: '!gemini', // Prefix for the Gemini model
       enable: true // Whether the Gemini model is enabled or not
     },
+    FLUX: {
+      prefix: '!flux',
+      enable: true
+    },
     Custom: [
       {
         /** Custom Model */
