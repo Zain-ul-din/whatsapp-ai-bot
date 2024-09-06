@@ -3,9 +3,15 @@ import { Boom } from '@hapi/boom';
 import * as fs from 'fs';
 import path from 'path';
 import { messagesHandler } from './handlers/messages';
+import { useMongoDBAuthState } from 'mongo-baileys';
+import { ENV } from '../env';
+import { connectToMongoDB } from '../mongo-db';
 
 export async function connectToWhatsApp() {
-  const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
+  const { state, saveCreds } =
+    ENV.MONGO_URL !== undefined
+      ? await useMongoDBAuthState((await connectToMongoDB()).collection as any)
+      : await useMultiFileAuthState('auth_info_baileys');
   const sock = makeWASocket({ printQRInTerminal: true, auth: state });
 
   sock.ev.on('connection.update', async (update) => {

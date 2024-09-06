@@ -7,5 +7,6 @@ export const ENV = {
   openAIKey: process.env.OPENAI_API_KEY,
   dreamStudioKey: process.env.DREAMSTUDIO_API_KEY,
   geminiKey: process.env.GEMINI_API_KEY,
-  HFKey: process.env.HF_TOKEN
+  HFKey: process.env.HF_TOKEN,
+  MONGO_URL: process.env.MONGO_URL
 };
