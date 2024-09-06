@@ -10,7 +10,8 @@ import { DalleModel } from '../../../models/DalleModel';
 const gptModel = new ChatGptModel();
 const geminiModel = new GeminiModel();
 const geminiVisionModel = new GeminiVisionModel();
-const dalleModel = new DalleModel();
+const dalle2Model = new DalleModel('DALLE');
+const dalle3Model = new DalleModel('DALLE3');
 
 // handles message
 export async function handleMessage({ client, msg, metadata }: MessageHandlerParams) {
@@ -35,7 +36,7 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
   }
 
   if (modelToUse === 'DALLE' && metadata.msgType === 'text') {
-    await dalleModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
+    await dalle2Model.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
       if (!err) {
         client.sendMessage(
           metadata.remoteJid,
@@ -50,20 +51,17 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
   }
 
   if (modelToUse === 'DALLE3' && metadata.msgType === 'text') {
-    await dalleModel.sendMessage(
-      { sender: metadata.sender, prompt, model: 'dall-e-3' },
-      async (res, err) => {
-        if (!err) {
-          client.sendMessage(
-            metadata.remoteJid,
-            { image: { url: res.url }, caption: res.caption },
-            { quoted: msg }
-          );
-        } else {
-          client.sendMessage(metadata.remoteJid, { text: err }, { quoted: msg });
-        }
+    await dalle3Model.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
+      if (!err) {
+        client.sendMessage(
+          metadata.remoteJid,
+          { image: { url: res.url }, caption: res.caption },
+          { quoted: msg }
+        );
+      } else {
+        client.sendMessage(metadata.remoteJid, { text: err }, { quoted: msg });
       }
-    );
+    });
     return;
   }
 

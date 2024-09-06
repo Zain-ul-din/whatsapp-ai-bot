@@ -8,7 +8,6 @@ import { ENV } from '../lib/env';
 interface DalleModelParams {
   sender: string;
   prompt: string;
-  model?: 'dall-e-2' | 'dall-e-3';
 }
 
 type HandleType = (
@@ -17,13 +16,13 @@ type HandleType = (
 ) => Promise<void>;
 
 class DalleModel extends AiModel<DalleModelParams, {}> {
-  public constructor() {
-    super(ENV.openAIKey, 'DALLE');
+  public constructor(modelName: 'DALLE' | 'DALLE3') {
+    super(ENV.openAIKey, modelName);
     this.client = new OpenAI({ apiKey: this.apiKey });
   }
 
   public async sendMessage(
-    { sender, prompt, model }: DalleModelParams,
+    { sender, prompt }: DalleModelParams,
     handle: HandleType
   ): Promise<void> {
     const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, sender, prompt));
@@ -32,7 +31,7 @@ class DalleModel extends AiModel<DalleModelParams, {}> {
       const startTime = Date.now();
 
       const res = await this.client.images.generate({
-        model: model || 'dall-e-2',
+        model: this.aiModelName === 'DALLE3' ? 'dall-e-3' : 'dall-e-2',
         n: 1,
         size: '512x512',
         prompt
