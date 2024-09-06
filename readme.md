@@ -4,7 +4,7 @@
 - This branch is still under construction 🚧. Currently, we only support the models listed below, but support for new models will be added soon.
 ```
 
-Supported Models:
+**Supported Models:**
 
 <table>
   <thead>
@@ -12,18 +12,46 @@ Supported Models:
       <th align="center">Model</th>
       <th align="center">Provider</th>
       <th align="center">Type</th>
+      <th align="center">Usage</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td align="center">Chat GPT</td>
       <td align="center">Open AI</td>
-      <td align="center">text</td>
+      <td align="center">text to text</td>
+      <td align="center">!chatgpt</td>
+    </tr>
+    <tr>
+      <td align="center">Gemini</td>
+      <td align="center">Google</td>
+      <td align="center">text to text</td>
+      <td align="center">!gemini</td>
+    </tr>
+    <tr>
+      <td align="center">Gemini Vision</td>
+      <td align="center">Google</td>
+      <td align="center">image to text</td>
+      <td align="center">!gemini-vision</td>
+    </tr>
+    <tr>
+      <td align="center">Dalle 2</td>
+      <td align="center">Open AI</td>
+      <td align="center">text to image</td>
+      <td align="center">!dalle</td>
+    </tr>
+    <tr>
+      <td align="center">Dalle 3</td>
+      <td align="center">Open AI</td>
+      <td align="center">text to image + revised text</td>
+      <td align="center">!dalle3</td>
     </tr>
   </tbody>
 </table>
 
- <table align="center">
+**Useful links:**
+
+ <table>
   <thead>
   <tr>
    <th>♥ Sponsor</th>
@@ -56,7 +84,7 @@ Supported Models:
   </tbody>
  </table>
 
----
+<br>
 
 <div align="center">
 
@@ -135,6 +163,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - `!gemini-vision` use `gemini-pro-vision` model for images
 - `!chatgpt` use chat-gpt.
 - `!dalle` use Dalle.
+- `!dalle3` use Dalle 3.
 - `!stable` use Stability AI.
 - `!bot` use custom model.
 
@@ -179,6 +208,9 @@ A big thank you to these people for supporting this project.
     <img src="https://avatars.githubusercontent.com/u/47256157?v=4" width="150" height="150"/>
    </th>
    <th>
+    <img src="https://avatars.githubusercontent.com/u/119153707?v=4" width="150" height="150">
+   </th>
+   <th>
     <img src="https://avatars.githubusercontent.com/u/0?v=4" width="150" height="150"/>
    </th>
   </tr>
@@ -188,6 +220,9 @@ A big thank you to these people for supporting this project.
     <td align="center">
      <a target="_blank" href="https://github.com/levitco">Levitco</a>
     💎
+    </td>
+    <td align="center">
+     <a target="_blank" href="https://github.com/AnasAshfaq20">Anas Ashfaq</a>
     </td>
     <td align="center">
     <a target="_blank" href="https://www.buymeacoffee.com/zainuldin">YOU?</a>
