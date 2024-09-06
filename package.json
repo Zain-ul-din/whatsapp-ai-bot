@@ -19,13 +19,14 @@
         "vite-node": "^0.28.5"
     },
     "dependencies": {
-        "@google/generative-ai": "^0.1.2",
+        "@google/generative-ai": "^0.17.1",
         "@types/qrcode-terminal": "^0.12.0",
         "@whiskeysockets/baileys": "^6.7.7",
         "dotenv": "^16.0.3",
         "openai": "^4.56.0",
         "ora": "3.2.0",
         "qrcode-terminal": "^0.12.0",
-        "stability-client": "^1.8.0"
+        "stability-client": "^1.8.0",
+        "whatsapp-ai-bot": "file:"
     }
 }

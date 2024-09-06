@@ -1,9 +1,16 @@
+import { downloadMediaMessage } from '@whiskeysockets/baileys';
 import { ChatGptModel } from '../../../models/ChatGptModel';
+import { GeminiModel } from '../../../models/GeminiModel';
+import { GeminiVisionModel } from '../../../models/GeminiVisionModel';
 import { AiModels } from '../../../types/AiModels';
 import { Util } from '../../../util/Util';
 import MessageHandlerParams from '../types';
+import { DalleModel } from '../../../models/DalleModel';
 
 const gptModel = new ChatGptModel();
+const geminiModel = new GeminiModel();
+const geminiVisionModel = new GeminiVisionModel();
+const dalleModel = new DalleModel();
 
 // handles message
 export async function handleMessage({ client, msg, metadata }: MessageHandlerParams) {
@@ -11,11 +18,72 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
 
   if (!modelToUse) return;
 
+  const prompt = metadata.text.split(' ').slice(1).join(' ');
+
   if (modelToUse === 'ChatGPT' && metadata.msgType === 'text') {
-    gptModel.sendMessage({ sender: metadata.sender, prompt: metadata.text }, async (res, err) => {
+    await gptModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
       client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
     });
     return;
+  }
+
+  if (modelToUse === 'Gemini' && metadata.msgType === 'text') {
+    await geminiModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
+      client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
+    });
+    return;
+  }
+
+  if (modelToUse === 'DALLE' && metadata.msgType === 'text') {
+    await dalleModel.sendMessage({ sender: metadata.sender, prompt }, async (res, err) => {
+      if (!err) {
+        client.sendMessage(
+          metadata.remoteJid,
+          { image: { url: res.url }, caption: res.caption },
+          { quoted: msg }
+        );
+      } else {
+        client.sendMessage(metadata.remoteJid, { text: err }, { quoted: msg });
+      }
+    });
+    return;
+  }
+
+  if (modelToUse === 'DALLE3' && metadata.msgType === 'text') {
+    await dalleModel.sendMessage(
+      { sender: metadata.sender, prompt, model: 'dall-e-3' },
+      async (res, err) => {
+        if (!err) {
+          client.sendMessage(
+            metadata.remoteJid,
+            { image: { url: res.url }, caption: res.caption },
+            { quoted: msg }
+          );
+        } else {
+          client.sendMessage(metadata.remoteJid, { text: err }, { quoted: msg });
+        }
+      }
+    );
+    return;
+  }
+
+  // Generative Models
+  if (
+    modelToUse === 'GeminiVision' &&
+    metadata.msgType === 'image' &&
+    metadata.imgMetaData.caption
+  ) {
+    const { mimeType, url } = metadata.imgMetaData;
+    if (mimeType === 'image/jpeg') {
+      const buffer = await downloadMediaMessage(msg, 'buffer', {});
+      await geminiVisionModel.sendMessage(
+        { sender: metadata.sender, prompt: { prompt, buffer, mimeType } },
+        async (res, err) => {
+          client.sendMessage(metadata.remoteJid, { text: err || res }, { quoted: msg });
+        }
+      );
+      return;
+    }
   }
 
   client.sendMessage(metadata.remoteJid, { text: `Hi It's WAAI BOT here 🤖` }, { quoted: msg });

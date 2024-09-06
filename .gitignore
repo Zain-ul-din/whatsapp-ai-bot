@@ -16,3 +16,6 @@
 # local session
 /session
 /auth_info_baileys
+
+
+package-lock.json

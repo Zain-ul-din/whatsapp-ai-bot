@@ -12,9 +12,9 @@ interface ChatGptModelParams {
   prompt: string;
 }
 
-type HandlerType = (res: string, error?: string) => Promise<void>;
+type HandleType = (res: string, error?: string) => Promise<void>;
 
-class ChatGptModel extends AiModel<ChatGptModelParams, HandlerType> {
+class ChatGptModel extends AiModel<ChatGptModelParams, HandleType> {
   public constructor() {
     super(ENV.openAIKey, 'ChatGPT');
     this.openai = new OpenAI({
@@ -26,7 +26,7 @@ class ChatGptModel extends AiModel<ChatGptModelParams, HandlerType> {
 
   public async sendMessage(
     { prompt, sender }: ChatGptModelParams,
-    handler: HandlerType
+    handle: HandleType
   ): Promise<void> {
     const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, sender, prompt));
     spinner.start();
@@ -47,7 +47,7 @@ class ChatGptModel extends AiModel<ChatGptModelParams, HandlerType> {
       this.history[sender].push(message);
 
       const res = message.content || '';
-      await handler(res);
+      await handle(res);
 
       spinner.succeed(
         MessageTemplates.reqSucceedStr(this.aiModelName, sender, res, Date.now() - startTime)
@@ -60,7 +60,7 @@ class ChatGptModel extends AiModel<ChatGptModelParams, HandlerType> {
           err
         )
       );
-      await handler('', 'An error occur please see console for more information.');
+      await handle('', 'An error occur please see console for more information.');
     }
   }
 
