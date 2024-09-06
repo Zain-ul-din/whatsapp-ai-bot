@@ -34,7 +34,8 @@ export default async function useMessageParser(
     | 'location'
     | 'audio' = 'unknown';
   if (conversation) msgType = 'text';
-  else if (extendedTextMessage) msgType = 'extendedText';
+  else if (extendedTextMessage) msgType = 'text';
+  // msgType = 'extendedText';
   else if (imageMessage) msgType = 'image';
   else if (videoMessage) msgType = 'video';
   else if (audioMessage) msgType = 'audio';
