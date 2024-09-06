@@ -12,6 +12,7 @@
       <th align="center">Model</th>
       <th align="center">Provider</th>
       <th align="center">Type</th>
+      <th align="center">Usage</th>
     </tr>
   </thead>
   <tbody>
@@ -19,26 +20,31 @@
       <td align="center">Chat GPT</td>
       <td align="center">Open AI</td>
       <td align="center">text to text</td>
+      <td align="center">!chatgpt</td>
     </tr>
     <tr>
       <td align="center">Gemini</td>
       <td align="center">Google</td>
       <td align="center">text to text</td>
+      <td align="center">!gemini</td>
     </tr>
     <tr>
       <td align="center">Gemini Vision</td>
       <td align="center">Google</td>
       <td align="center">image to text</td>
+      <td align="center">!gemini-vision</td>
     </tr>
     <tr>
       <td align="center">Dalle 2</td>
       <td align="center">Open AI</td>
       <td align="center">text to image</td>
+      <td align="center">!dalle</td>
     </tr>
     <tr>
       <td align="center">Dalle 3</td>
       <td align="center">Open AI</td>
       <td align="center">text to image + revised text</td>
+      <td align="center">!dalle3</td>
     </tr>
   </tbody>
 </table>
