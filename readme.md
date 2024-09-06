@@ -46,6 +46,12 @@
       <td align="center">text to image + revised text</td>
       <td align="center">!dalle3</td>
     </tr>
+    <tr>
+      <td align="center">FLUX.1-schnell</td>
+      <td align="center">Hugging Face</td>
+      <td align="center">text to image</td>
+      <td align="center">!flux</td>
+    </tr>
   </tbody>
 </table>
 
@@ -149,6 +155,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
  OPENAI_API_KEY=YOUR_OPEN_AI_API_KEY
  DREAMSTUDIO_API_KEY=YOUR_STABILITY_AI_API_KEY
  GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+ HF_TOKEN=HUGGING_FACE_TOKEN
 ```
 
 **4. Run the code**
@@ -165,6 +172,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 - `!dalle` use Dalle.
 - `!dalle3` use Dalle 3.
 - `!stable` use Stability AI.
+- `!flux` use flux AI.
 - `!bot` use custom model.
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
