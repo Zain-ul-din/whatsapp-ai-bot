@@ -1,11 +1,12 @@
 **Build Image:**
+x
 
 ```bash
-docker build -t my-node-app . --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)" --no-cache
+docker build -t wa-bot-img . --build-arg SSH_KEY="$(cat ~/.ssh/id_rsa)" --no-cache
 ```
 
 **Run the container:**
 
 ```bash
-docker run -d --name wa-ai -p 3000:3000 my-node-app
+docker run -d --name wa-ai-bot -p 3000:3000 wa-bot-img
 ```

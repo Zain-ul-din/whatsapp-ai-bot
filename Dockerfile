@@ -1,6 +1,6 @@
-FROM node:20
+FROM node:20-alpine
 
-# RUN apk add --no-cache git openssh openssh-keygen openssl
+RUN apk add --no-cache git openssh openssh-keygen openssl
 
 # SSH setup
 
@@ -15,9 +15,8 @@ RUN mkdir -p /root/.ssh && \
 RUN echo "$SSH_KEY" > /root/.ssh/id_rsa && \
     chmod 600 /root/.ssh/id_rsa
 
-
 # RUN eval $(ssh-agent -s)
-# RUN echo "$SSH_KEY" > /root/.ssh/id_rsa
+RUN echo "$SSH_KEY" > /root/.ssh/id_rsa
 # RUN  echo "    IdentityFile ~/.ssh/id_rsa" >> /etc/ssh/ssh_config
 # RUN echo -e "Host github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_rsa" > /etc/ssh/ssh_config
 # RUN echo -e "Host github.com\n  HostName github.com\n  User git\n  IdentityFile ~/.ssh/id_rsa" > ~/.ssh/config
