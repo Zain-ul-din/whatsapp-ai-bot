@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite-node ./src/index.ts",
-    "start": "vite-node ./src/index.ts",
+    "start": "npx yarn dev",
     "format": "prettier --write ./src",
     "test": "vite-node ./test/index.test.ts",
     "test:baileys": "vite-node ./baileys/index.ts",
@@ -22,6 +22,7 @@
     "@google/generative-ai": "^0.17.1",
     "@types/qrcode-terminal": "^0.12.0",
     "@whiskeysockets/baileys": "^6.7.7",
+    "@whiskeysockets/libsignal-node": "github:WhiskeySockets/libsignal-node",
     "dotenv": "^16.0.3",
     "mongo-baileys": "^1.0.1",
     "mongodb": "^6.8.0",
