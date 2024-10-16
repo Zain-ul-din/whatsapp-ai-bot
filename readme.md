@@ -129,8 +129,8 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 
 ###
 
-- [Open issue here](issues)
-- [Ask Question here](discussions)
+- [Open issue here](./../../issues)
+- [Ask Question here](./../../discussions)
 
 <!-- about -->
 
