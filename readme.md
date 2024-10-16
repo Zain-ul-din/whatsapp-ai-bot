@@ -1,6 +1,6 @@
 
 > [!NOTE]
-> We are switching to the @whiskeysockets/baileys library for our bot because it's lightweight and easy to deploy.
+> We are switching to the [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys) library for our bot because it's lightweight and easy to deploy.
 >
 > This branch is still under construction 🚧. Currently, we only support the models listed below, but support for new models will be added soon.
 
