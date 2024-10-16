@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite-node ./src/index.ts",
-    "start": "npx yarn dev",
+    "start": "npx yarn && npx yarn dev",
     "format": "prettier --write ./src",
     "test": "vite-node ./test/index.test.ts",
     "test:baileys": "vite-node ./baileys/index.ts",
