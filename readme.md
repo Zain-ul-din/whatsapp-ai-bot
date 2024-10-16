@@ -106,7 +106,7 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
-[Docs Link](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/blob/master/docs/config-docs.md)
+[Docs Link](docs/config-docs.md)
 
 # Tutorials
 
@@ -129,8 +129,8 @@ This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to pre
 
 ###
 
-- [Open issue here](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/issues)
-- [Ask Question here](https://github.com/Zain-ul-din/WhatsApp-Ai-bot/discussions)
+- [Open issue here](issues)
+- [Ask Question here](discussions)
 
 <!-- about -->
 
