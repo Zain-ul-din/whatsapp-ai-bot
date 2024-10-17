@@ -3,9 +3,9 @@ import { existsSync, readFileSync } from 'fs';
 import { AiModels } from '../types/AiModels';
 import { IModelConfig, IModelType } from '../types/Config';
 
+
 export class Util {
   public static getModelByPrefix(message: string): AiModels | undefined {
-    // models
     for (let [modelName, model] of Object.entries(config.models)) {
       if (
         !(model as IModelConfig).enable &&

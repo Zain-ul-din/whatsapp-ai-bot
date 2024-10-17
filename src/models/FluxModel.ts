@@ -1,7 +1,7 @@
 import { useSpinner } from '../hooks/useSpinner';
-import { ENV } from '../lib/env';
+import { ENV } from '../baileys/env';
 import { MessageTemplates } from '../util/MessageTemplates';
-import { AiModel } from './AiModel';
+import { AiModel } from './BaseAiModel';
 
 interface FluxAiModelParams {
   sender: string;

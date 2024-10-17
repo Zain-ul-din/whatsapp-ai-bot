@@ -1,5 +1,6 @@
 /* Models config files */
 import { Config } from './types/Config';
+import { ENV } from './baileys/env';
 
 const config: Config = {
   chatGPTModel: 'gpt-3.5-turbo', // learn more about GPT models https://platform.openai.com/docs/models

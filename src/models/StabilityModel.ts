@@ -1,10 +1,10 @@
-import { AiModel } from './AiModel';
+import { AiModel } from './BaseAiModel';
 import fetch from 'node-fetch';
 import { useSpinner } from '../hooks/useSpinner';
 import type { Message } from 'whatsapp-web.js';
 import { MessageMedia } from 'whatsapp-web.js';
 import { MessageTemplates } from '../util/MessageTemplates';
-import { ENV } from '../lib/env';
+import { ENV } from '../baileys/env';
 
 class StabilityModel extends AiModel<string> {
     public constructor() {

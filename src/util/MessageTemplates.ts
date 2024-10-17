@@ -1,20 +1,32 @@
-class MessageTemplates {
-  public static requestStr(model: string, from: string, prompt: string): string {
-    return `${model}Model fetching | prompt:"${prompt}" from user:"${from}"\n`;
-  }
+import { ENV } from '../baileys/env';
 
-  public static reqSucceedStr(
-    model: string,
-    from: string,
-    response: string,
-    timeTook: number
-  ): string {
-    return `${model}Model succeed | reply has been sent to user:"${from}" response:${response}  <Done in ${timeTook} ms>\n\n`;
-  }
+type MessageType = 'fetch' | 'succeed' | 'failed';
 
-  public static reqFailStr(model: string, errInfo: string, err: any) {
-    return `${model}Model request fail | An error occur, ${errInfo} err: ${err}\n`;
-  }
+interface MessageTemplate {
+  model: string;
+  from: string;
+  prompt: string;
+  type: MessageType;
+  response?: string;
+  timeTook?: number;
+  errInfo?: string;
+  err?: any;
 }
 
-export { MessageTemplates };
+export default function generateMessage(
+  type: MessageType,
+  template: MessageTemplate
+): string | undefined {
+  if (ENV.Debug === false) return;
+
+  switch (type) {
+    case 'fetch':
+      return `${template.model}Model fetching | prompt:"${template.prompt}" from user:"${template.from}"\n`;
+    case 'succeed':
+      return `${template.model}Model succeed | reply has been sent to user:"${template.from}" response:${template.response} <Done in ${template.timeTook} ms>\n\n`;
+    case 'failed':
+      return `${template.model}Model request fail | An error occur, ${template.errInfo} err: ${template.err}\n`;
+    default:
+      throw new Error('Invalid message type');
+  }
+}

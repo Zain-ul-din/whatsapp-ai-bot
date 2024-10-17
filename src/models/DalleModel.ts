@@ -1,9 +1,9 @@
-import { AiModel } from './AiModel';
+import { AiModel } from './BaseAiModel';
 import { useSpinner } from '../hooks/useSpinner';
 import OpenAI from 'openai';
 
 import { MessageTemplates } from '../util/MessageTemplates';
-import { ENV } from '../lib/env';
+import { ENV } from '../baileys/env';
 
 interface DalleModelParams {
   sender: string;
@@ -17,8 +17,8 @@ type HandleType = (
 
 class DalleModel extends AiModel<DalleModelParams, {}> {
   public constructor(modelName: 'DALLE' | 'DALLE3') {
-    super(ENV.openAIKey, modelName);
-    this.client = new OpenAI({ apiKey: this.apiKey });
+    super(ENV.API_KEY_OPENAI, modelName);
+    this.client = new OpenAI({ apiKey: this.getApiKey() });
   }
 
   public async sendMessage(

@@ -1,5 +1,5 @@
-import { AiModel } from './AiModel';
-import { ENV } from '../lib/env';
+import { AiModel } from './BaseAiModel';
+import { ENV } from '../baileys/env';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { useSpinner } from '../hooks/useSpinner';
 import { MessageTemplates } from '../util/MessageTemplates';
