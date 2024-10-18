@@ -92,7 +92,7 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 
 ### 4. Run the code
 
-- Run `setup.sh` to start the bot
+- Run `npm run start` to run the bot.
 
 - Scan QR code.
 
