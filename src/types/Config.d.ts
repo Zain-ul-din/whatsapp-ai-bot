@@ -1,35 +1,36 @@
-import { AiModels, AiModelsName } from './AiModels';
+import { AIModels, AIModelsName } from './AiModels';
 
 export interface IModelConfig {
-  prefix: string;
-  enable?: boolean;
+  prefix: string | undefined;
+  enable: boolean;
+  modelToUse?: string;
+  settings?: any;
 }
 
 export interface IModelType extends IModelConfig {
   modelName: string;
   prefix: string;
   context: string;
-  modelToUse?: AiModelsName;
+  modelToUse?: AIModelsName;
   includeSender?: boolean;
 }
 
 export interface IDefaultConfig {
-  enable?: boolean;
+  enabled: boolean;
   /** default model to use when prefix is disabled*/
-  defaultModel: AiModels;
+  defaultModel: AIModels;
 }
 
 export type Config = {
   models: {
-    [key in AiModels]?: key extends 'Custom' ? Array<IModelType> | [] : IModelConfig | null;
+    [key in AIModels]?: key extends 'Custom' ? Array<IModelType> | [] : IModelConfig | null;
   };
 } & {
-  enablePrefix: IDefaultConfig;
+  prefix: IDefaultConfig;
   sessionStorage: {
     enable: boolean;
     wwjsPath: string;
   };
-  chatGPTModel: string;
   sendWelcomeMessage: boolean;
   selfMessage: {
     skipPrefix: boolean;

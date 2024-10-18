@@ -14,9 +14,7 @@ import { ENV } from './env';
 
 /* Util */
 const connectToDatabase = async () => {
-  const UseMongoDB: boolean = ENV.MONGO_URL !== undefined;
-
-  if (UseMongoDB) {
+  if (ENV.MONGO_ENABLED) {
     return await useMongoDBAuthState(
       ( await connectToMongoDB() ).collection as any
     );

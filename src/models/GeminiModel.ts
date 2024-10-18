@@ -1,67 +1,98 @@
-import { AiModel } from './BaseAiModel';
+/* Third-party modules */
+import {
+  ChatSession,
+  InlineDataPart,
+  GenerativeModel,
+  GoogleGenerativeAI
+} from '@google/generative-ai';
+import {
+  AnyMessageContent,
+  downloadMediaMessage,
+  generateWAMessage
+} from '@whiskeysockets/baileys';
+
+/* Local modules */
+import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
 import { ENV } from '../baileys/env';
-import { useSpinner } from '../hooks/useSpinner';
-import { MessageTemplates } from '../util/MessageTemplates';
-import { Content, GoogleGenerativeAI } from '@google/generative-ai';
 
-interface GeminiModelParams {
-  sender: string;
-  prompt: string;
-}
+/* Gemini Model */
+class GeminiModel extends AIModel<AIArguments, AIHandle> {
+  /* Variables */
+  private generativeModel: GenerativeModel;
+  private Gemini: GoogleGenerativeAI;
+  public chats: { [from: string]: ChatSession };
 
-type HandleType = (res: string, error?: string) => Promise<void>;
-
-class GeminiModel extends AiModel<GeminiModelParams, HandleType> {
   public constructor() {
-    super(ENV.geminiKey, 'Gemini');
-    this.genAI = new GoogleGenerativeAI(this.apiKey);
-    this.history = {};
+    super(ENV.API_KEY_GEMINI, 'Gemini', ENV.GEMINI_ICON_PREFIX);
+    this.Gemini = new GoogleGenerativeAI(ENV.API_KEY_GEMINI as string);
+
+    // https://ai.google.dev/gemini-api/docs/models/gemini
+    this.generativeModel = this.Gemini.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    this.chats = {};
   }
 
-  async sendMessage({ sender, prompt }: GeminiModelParams, handle: HandleType): Promise<any> {
-    const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, sender, prompt));
-    spinner.start();
+  /* Methods */
+  public async generateCompletion(user: string, prompt: string): Promise<string> {
+    if (!this.sessionExists(user)) {
+      this.sessionCreate(user);
+      this.chats[user] = this.generativeModel.startChat();
+    }
 
+    const chat = this.chats[user];
+    return (await chat.sendMessage(prompt)).response.text();
+  }
+
+  public createGenerativeContent(buffer: Buffer, mimeType: string): InlineDataPart {
+    return {
+      inlineData: {
+        data: buffer.toString('base64'),
+        mimeType
+      }
+    };
+  }
+
+  public async generateImageCompletion(prompt: string, metadata: AIMetaData): Promise<string> {
+    const { mimeType } = metadata.quoteMetaData.imgMetaData;
+    if (mimeType === 'image/jpeg') {
+      const buffer = await downloadMediaMessage(
+        { message: metadata.quoteMetaData.message } as any,
+        'buffer',
+        {}
+      );
+      const imageParts = this.createGenerativeContent(buffer, mimeType);
+      const result = await this.generativeModel.generateContent([prompt, imageParts]);
+      const resultText = result.response.text();
+
+      return resultText;
+    }
+
+    return '';
+  }
+
+  async sendMessage({ sender, prompt, metadata }: AIArguments, handle: AIHandle) {
     try {
-      const startTime = Date.now();
+      let message = '';
+      console.log(metadata.quoteMetaData);
 
-      // check out more at: https://ai.google.dev/tutorials/node_quickstart
-      const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      if (metadata.isQuoted) {
+        if (metadata.quoteMetaData.type === 'image') {
+          message = this.iconPrefix + (await this.generateImageCompletion(prompt, metadata));
+        } else {
+          prompt = 'Quoted Message:\n' + metadata.quoteMetaData.text + '---\nMessage:\n' + prompt;
+          message = this.iconPrefix + (await this.generateCompletion(sender, prompt));
+        }
+      } else {
+        message = this.iconPrefix + (await this.generateCompletion(sender, prompt));
+      }
 
-      const chat = model.startChat({
-        history: this.history[sender]
-      });
-
-      const res = await chat.sendMessage(prompt);
-
-      // TODO: handle usage metadata
-
-      const resText = res.response.text();
-
-      // push conversation to history
-      if (this.history[sender] === undefined) this.history[sender] = [];
-      this.history[sender].push({ role: 'user', parts: [{ text: prompt }] });
-      this.history[sender].push({ role: 'model', parts: [{ text: resText }] });
-
-      await handle(resText);
-
-      spinner.succeed(
-        MessageTemplates.reqSucceedStr(this.aiModelName, sender, resText, Date.now() - startTime)
-      );
+      handle({ text: message });
     } catch (err) {
-      spinner.fail(
-        MessageTemplates.reqFailStr(
-          this.aiModelName,
-          'at GeminiModel.ts sendMessage(prompt, msg)',
-          err
-        )
+      handle(
+        '',
+        '[Error] An error occur please see console for more information.\n[Error] Message:\n' + err
       );
-      handle('', 'An error occur please see console for more information.');
     }
   }
-
-  private genAI: GoogleGenerativeAI;
-  private history: { [sender: string]: Content[] };
 }
 
 export { GeminiModel };

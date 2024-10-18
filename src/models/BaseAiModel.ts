@@ -1,7 +1,9 @@
 import { MessageUpsertType } from '@whiskeysockets/baileys';
-import { AiModels } from '../types/AiModels';
+import { AIModels } from '../types/AiModels';
 
-type MetaData = {
+type AIHandle = (res: any, error?: string) => Promise<void>;
+
+type AIMetaData = {
   remoteJid: string;
   sender: string;
   senderName?: string;
@@ -9,6 +11,17 @@ type MetaData = {
   msgType: 'unknown' | 'text' | 'extendedText' | 'image' | 'video' | 'document' | 'contact' | 'location' | 'audio';
   type: MessageUpsertType;
   isQuoted: boolean;
+  quoteMetaData: {
+    remoteJid: string;
+    message: any;
+    text: string;
+    type: 'text' | 'image';
+    imgMetaData: {
+      url: string;
+      mimeType: string;
+      caption: string;
+    };
+  };
   timeStamp: Date;
   text: string;
   isGroup: boolean;
@@ -30,24 +43,34 @@ type MetaData = {
 interface AIArguments {
   sender: string;
   prompt: string;
-  metadata: MetaData;
+  metadata: AIMetaData;
   prefix: string;
 }
 
-abstract class AiModel<AIArguments, CallBack> {
+abstract class AIModel<AIArguments, CallBack> {
   /* Variables */
   private apiKey: string;
-  public modelName: AiModels;
+  public history: { [from: string]: any[] };
+  public modelName: AIModels;
+  public iconPrefix: string;
 
   /* Methods */
-  public constructor(apiKey: string | undefined, aiModelName: AiModels) {
+  public constructor(apiKey: string | undefined, modelName: AIModels, icon?: string) {
     this.apiKey = apiKey || 'undefined';
-    this.modelName = aiModelName;
+    this.modelName = modelName;
+
+    this.history = {};
+    this.iconPrefix = icon === undefined ? '' : '[' + icon + '] ';
   }
 
-  public getApiKey(): string { return this.apiKey; }
+  public getApiKey(): string { return this.apiKey };
+  public sessionCreate(user: string): void { this.history[user] = [] };
+  public sessionRemove(user: string): void { delete this.history[user] };
+  public sessionExists(user: string): boolean { return this.history[user] !== undefined };
+  public sessionAddMessage(user: string, args: any): void { this.history[user].push(args) };
+  public addPrefixIcon(text: string): string { return this.iconPrefix + text };
 
   abstract sendMessage(args: AIArguments, handle: CallBack): Promise<any>;
 }
 
-export { AiModel, AIArguments };
+export { AIModel, AIArguments, AIHandle, AIMetaData };

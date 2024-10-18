@@ -1,4 +1,4 @@
-import { AiModel } from './BaseAiModel';
+import { AIModel } from './BaseAiModel';
 import { ENV } from '../baileys/env';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { useSpinner } from '../hooks/useSpinner';
@@ -11,7 +11,7 @@ interface GeminiVisionModelParams {
 
 type HandleType = (res: string, error?: string) => Promise<void>;
 
-class GeminiVisionModel extends AiModel<GeminiVisionModelParams, HandleType> {
+class GeminiVisionModel extends AIModel<GeminiVisionModelParams, HandleType> {
   public constructor() {
     super(ENV.geminiKey, 'GeminiVision', 'Image');
     this.genAI = new GoogleGenerativeAI(this.apiKey);
