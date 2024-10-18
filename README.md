@@ -10,7 +10,10 @@
 
 </div>
 
-The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`Gemini-Vision`**, **`CHAT-GPT`**, **`DALL-E`**, and **`Stability AI`**, and users can also create their **`own models`** to customize the bot's behavior.
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`ChatGPT`** and **`DALL-E`**..
+
+> [!NOTE]
+> Custom models aren't supported for now, but we are working on it.
 
 # Table of Content
 
@@ -96,13 +99,8 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 # Default Settings
 
 - `!gemini` use gemini.
-- `!gemini-vision` use `gemini-pro-vision` model for images
 - `!chatgpt` use chat-gpt.
 - `!dalle` use Dalle.
-- `!dalle3` use Dalle 3.
-- `!stable` use Stability AI.
-- `!flux` use flux AI.
-- `!bot` use custom model.
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
