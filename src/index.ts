@@ -7,5 +7,5 @@
 
 // whatsappClient.messageEvent.on('self', welcomeUser);
 
-import { connectToWhatsApp } from './lib/baileys';
+import { connectToWhatsApp } from "./baileys";
 connectToWhatsApp();

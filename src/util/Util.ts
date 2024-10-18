@@ -1,38 +1,18 @@
-import config from '../whatsapp-ai.config';
 import { existsSync, readFileSync } from 'fs';
-import { AiModels } from '../types/AiModels';
-import { IModelConfig, IModelType } from '../types/Config';
+import { IModelConfig } from '../types/Config';
+import { AIModels } from '../types/AiModels';
+import config from '../whatsapp-ai.config';
 
 export class Util {
-  public static getModelByPrefix(message: string): AiModels | undefined {
-    // models
+  public static getModelByPrefix(message: string): AIModels | undefined {
     for (let [modelName, model] of Object.entries(config.models)) {
+      const currentModel = model as IModelConfig;
+      if (!currentModel.enable) continue;
+
       if (
-        !(model as IModelConfig).enable &&
-        (modelName as AiModels) != 'Custom' // ignore array
-      )
-        continue;
-
-      if ((modelName as AiModels) == 'Custom') {
-        return Util.getModelByCustomPrefix(message);
-      } else if (
-        model &&
-        message.toLocaleLowerCase().startsWith((model as IModelConfig)?.prefix.toLocaleLowerCase())
+        message.toLocaleLowerCase().startsWith((currentModel.prefix as string).toLocaleLowerCase())
       ) {
-        return modelName as AiModels;
-      }
-    }
-
-    return undefined;
-  }
-
-  private static getModelByCustomPrefix(message: string): AiModels | undefined {
-    if (!config.models.Custom) return undefined;
-    for (let model of config.models.Custom) {
-      if (!(model as IModelType).enable) continue;
-
-      if (message.toLocaleLowerCase().startsWith(model.prefix.toLocaleLowerCase())) {
-        return model.modelName as AiModels;
+        return modelName as AIModels;
       }
     }
 

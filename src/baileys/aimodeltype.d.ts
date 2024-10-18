@@ -1,5 +1,5 @@
 import makeWASocket, { MessageUpsertType, WAMessage } from '@whiskeysockets/baileys';
-import useMessageParser from '../hooks/useMessageParser';
+import useMessageParser from './hooks/useMessageParser';
 
 type MessageHandlerParams = {
   client: ReturnType<typeof makeWASocket>;

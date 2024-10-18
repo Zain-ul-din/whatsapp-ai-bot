@@ -1,6 +1,6 @@
+import { AuthenticationCreds } from '@whiskeysockets/baileys';
 import { MongoClient } from 'mongodb';
 import { ENV } from '../env';
-import { AuthenticationCreds } from '@whiskeysockets/baileys';
 
 interface AuthDocument extends Document {
   _id: string;

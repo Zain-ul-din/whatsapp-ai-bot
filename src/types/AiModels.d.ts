@@ -1,10 +1,2 @@
-export type AiModels =
-  | 'ChatGPT'
-  | 'DALLE'
-  | 'StableDiffusion'
-  | 'Gemini'
-  | 'GeminiVision'
-  | 'Custom'
-  | 'DALLE3'
-  | 'FLUX';
-export type AiModelsName = Exclude<AiModels, 'Custom'>;
+export type AIModels = 'ChatGPT' | 'Gemini' | 'FLUX';
+export type AIModelsName = Exclude<AIModels, 'Custom'>;

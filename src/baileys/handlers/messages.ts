@@ -20,7 +20,6 @@ export function messagesHandler({
 
         if (!metadata) return;
         if (metadata.msgType === 'unknown') return;
-        // prevent message from locked group
         if (metadata.isGroup && metadata.groupMetaData.groupIsLocked) return;
 
         await (metadata.fromMe

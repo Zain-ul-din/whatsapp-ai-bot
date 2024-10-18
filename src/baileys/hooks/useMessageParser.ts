@@ -35,7 +35,6 @@ export default async function useMessageParser(
     | 'audio' = 'unknown';
   if (conversation) msgType = 'text';
   else if (extendedTextMessage) msgType = 'text';
-  // msgType = 'extendedText';
   else if (imageMessage) msgType = 'image';
   else if (videoMessage) msgType = 'video';
   else if (audioMessage) msgType = 'audio';
@@ -52,6 +51,17 @@ export default async function useMessageParser(
     msgType,
     type,
     isQuoted: false,
+    quoteMetaData: {
+      remoteJid: '',
+      message: {},
+      text: '',
+      type: 'text',
+      imgMetaData: {
+        url: '',
+        mimeType: '',
+        caption: ''
+      }
+    },
     timeStamp: message.messageTimestamp
       ? new Date((message.messageTimestamp as number) * 1000)
       : new Date(),
@@ -93,7 +103,22 @@ export default async function useMessageParser(
   // gather context info
   if (extendedTextMessage) {
     const { contextInfo } = extendedTextMessage;
-    if (contextInfo && contextInfo.quotedMessage) metaData.isQuoted = true;
+
+    if (contextInfo && contextInfo.quotedMessage) {
+      metaData.isQuoted = true;
+
+      metaData.quoteMetaData.remoteJid = contextInfo.remoteJid || '';
+      metaData.quoteMetaData.text = contextInfo.quotedMessage?.conversation || '';
+      metaData.quoteMetaData.message = contextInfo.quotedMessage || {};
+
+      if (contextInfo.quotedMessage.imageMessage) {
+        metaData.quoteMetaData.type = 'image';
+        metaData.quoteMetaData.imgMetaData.url = contextInfo.quotedMessage.imageMessage.url || '';
+        metaData.quoteMetaData.imgMetaData.mimeType =
+          contextInfo.quotedMessage.imageMessage.mimetype || '';
+        metaData.quoteMetaData.text = contextInfo.quotedMessage.imageMessage.caption || '';
+      }
+    }
   }
 
   // Check if the message is from a group
