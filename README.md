@@ -85,7 +85,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 - [Gemini API Key](https://aistudio.google.com/app/apikey)
 - [OpenAI API Key](https://platform.openai.com/api-keys)
-- [StabilityAI API Key](https://platform.stability.ai/account/keys)
+- [Hugging Face API Key](https://huggingface.co/)
 
 ### 3. Add API Keys
 
@@ -102,6 +102,7 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 - `!gemini` use gemini.
 - `!chatgpt` use chat-gpt.
 - `!dalle` use Dalle.
+- `!flux` use flux.
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
