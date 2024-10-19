@@ -10,7 +10,7 @@
 
 </div>
 
-The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`ChatGPT`** and **`DALL-E`**..
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`ChatGPT`**, **`DALL-E`**, **`Flux`**, and **`Stability AI`**.
 
 > [!NOTE]
 > Custom models aren't supported for now, but we are working on it.
@@ -35,6 +35,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 | Gemini Vision | [Google](https://ai.google.dev/gemini-api/docs/vision?lang=node#upload-image) | Image to Text | none |
 | Dalle 2 & 3 | [OpenAI](https://platform.openai.com/docs/api-reference/images/create) | Text to Image | !dalle |
 | Flux   | [Hugging Face](https://huggingface.co/black-forest-labs/FLUX.1-dev) | Text to Image | !flux |
+| Stability AI | [Stability AI](https://platform.stability.ai/docs/getting-started/stable-image) | Text to Image | !stability |
 
 # Demo
 
@@ -85,7 +86,8 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 - [Gemini API Key](https://aistudio.google.com/app/apikey)
 - [OpenAI API Key](https://platform.openai.com/api-keys)
-- [Hugging Face API Key](https://huggingface.co/)
+- [Hugging Face API Key](https://huggingface.co/settings/tokens)
+- [Stability AI API Key](https://platform.stability.ai/account/keys)
 
 ### 3. Add API Keys
 
@@ -103,6 +105,7 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 - `!chatgpt` use chat-gpt.
 - `!dalle` use Dalle.
 - `!flux` use flux.
+- `!stability` use stability.
 
 **Note! open `src/whatsapp-ai.config.ts` to edit config.**
 
@@ -119,7 +122,7 @@ Copy the file `.env.example` and rename it to `.env`, then set any settings you 
 
 # Disclaimer
 
-This bot utilizes Puppeteer to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
+This bot utilizes [baileys](https://github.com/WhiskeySockets/Baileys) to operate an actual instance of Whatsapp Web to prevent blocking. However, it is essential to note that these operations come at a cost charged by OpenAI and Stability AI for every request made. Please be aware that WhatsApp does not support bots or unofficial clients on its platform, so using this method is not entirely secure and could lead to getting blocked.
 
 ## Contributors
 
