@@ -1,25 +1,20 @@
 /* Third-party modules */
-import {
-  ChatCompletionMessageParam,
-  ChatCompletionMessage
-} from 'openai/resources/chat/completions';
+import { ChatCompletionMessage } from 'openai/resources/chat/completions';
 import OpenAI from 'openai';
 
 /* Local modules */
-import { AIModel, AIArguments } from './BaseAiModel';
+import { AIModel, AIArguments, AIHandle } from './BaseAiModel';
 import { ENV } from '../baileys/env';
 import config from '../whatsapp-ai.config';
 
 /* Util */
-type HandleType = (res: string, error?: string) => Promise<void>;
-
 interface BotImageResponse {
   url: string;
   caption: string;
 }
 
 /* ChatGPT Model */
-class ChatGPTModel extends AIModel<AIArguments, HandleType> {
+class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
   /* Variables */
   private Dalle3: boolean;
   private Dalle: OpenAI;
@@ -65,7 +60,7 @@ class ChatGPTModel extends AIModel<AIArguments, HandleType> {
     return { url: resInfo.url as string, caption: resInfo.revised_prompt as string };
   }
 
-  public async sendMessage({ sender, prompt }: AIArguments, handle: HandleType): Promise<any> {
+  public async sendMessage({ sender, prompt }: AIArguments, handle: AIHandle): Promise<any> {
     try {
       if (!this.sessionExists(sender)) {
         this.sessionCreate(sender);
@@ -74,7 +69,7 @@ class ChatGPTModel extends AIModel<AIArguments, HandleType> {
 
       const completion = await this.generateCompletion(sender);
       const res = completion.content || '';
-      await handle(res);
+      await handle({ text: res });
     } catch (err) {
       await handle('', 'An error occur please see console for more information.');
     }

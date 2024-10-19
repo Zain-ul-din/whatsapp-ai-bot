@@ -1,6 +1,3 @@
-/* Third-party modules */
-import { AnyRegularMessageContent, downloadMediaMessage } from '@whiskeysockets/baileys';
-
 /* Local modules */
 import MessageHandlerParams from './../aimodeltype';
 import { AIModels } from './../../types/AiModels';
@@ -16,7 +13,7 @@ import { ENV } from '../env';
 const modelTable: Record<AIModels, any> = {
   ChatGPT: ENV.OPENAI_ENABLED ? new ChatGPTModel() : null,
   Gemini: ENV.GEMINI_ENABLED ? new GeminiModel() : null,
-  FLUX: new FluxModel()
+  FLUX: ENV.HF_ENABLED ? new FluxModel() : null
 };
 
 // handles message
@@ -51,9 +48,17 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
         console.error(err);
         return;
       }
-      res.edit = messageResponse?.key;
 
-      client.sendMessage(metadata.remoteJid, res);
+      if (res.image) {
+        // delete the old message
+        if (messageResponse?.key) {
+          client.sendMessage(metadata.remoteJid, { delete: messageResponse.key });
+        }
+        client.sendMessage(metadata.remoteJid, res, { quoted: msg });
+      } else {
+        res.edit = messageResponse?.key;
+        client.sendMessage(metadata.remoteJid, res);
+      }
     }
   );
 }

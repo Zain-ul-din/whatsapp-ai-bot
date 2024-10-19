@@ -33,6 +33,11 @@ interface EnvInterface {
   GEMINI_PREFIX?: string;
   GEMINI_ENABLED: boolean;
   GEMINI_ICON_PREFIX?: string;
+
+  // // Hugging Face
+  HF_PREFIX?: string;
+  HF_ENABLED: boolean;
+  HF_ICON_PREFIX?: string;
 }
 
 export const ENV: EnvInterface = {
@@ -56,5 +61,8 @@ export const ENV: EnvInterface = {
   DALLE_USE_3: process.env.DALLE_USE_3 === 'True',
   GEMINI_PREFIX: process.env.GEMINI_PREFIX,
   GEMINI_ENABLED: process.env.GEMINI_ENABLED === 'True',
-  GEMINI_ICON_PREFIX: process.env.GEMINI_ICON_PREFIX
+  GEMINI_ICON_PREFIX: process.env.GEMINI_ICON_PREFIX,
+  HF_PREFIX: process.env.HF_PREFIX,
+  HF_ENABLED: process.env.HF_ENABLED === 'True',
+  HF_ICON_PREFIX: process.env.HF_ICON_PREFIX
 };

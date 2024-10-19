@@ -16,12 +16,12 @@ const config: Config = {
       }
     },
     Gemini: {
-      prefix: '!gemini',
-      enable: true
+      prefix: ENV.GEMINI_PREFIX,
+      enable: ENV.GEMINI_ENABLED
     },
     FLUX: {
-      prefix: '!flux',
-      enable: true
+      prefix: ENV.HF_PREFIX,
+      enable: ENV.HF_ENABLED
     }
     /*
     Custom: [

@@ -5,11 +5,7 @@ import {
   GenerativeModel,
   GoogleGenerativeAI
 } from '@google/generative-ai';
-import {
-  AnyMessageContent,
-  downloadMediaMessage,
-  generateWAMessage
-} from '@whiskeysockets/baileys';
+import { downloadMediaMessage } from '@whiskeysockets/baileys';
 
 /* Local modules */
 import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
@@ -72,8 +68,6 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   async sendMessage({ sender, prompt, metadata }: AIArguments, handle: AIHandle) {
     try {
       let message = '';
-      console.log(metadata.quoteMetaData);
-
       if (metadata.isQuoted) {
         if (metadata.quoteMetaData.type === 'image') {
           message = this.iconPrefix + (await this.generateImageCompletion(prompt, metadata));
