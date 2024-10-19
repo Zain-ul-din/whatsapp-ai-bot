@@ -1,62 +1,43 @@
-import { useSpinner } from '../hooks/useSpinner';
+/* Local modules */
 import { ENV } from '../baileys/env';
-import { MessageTemplates } from '../util/MessageTemplates';
-import { AIModel } from './BaseAiModel';
+import { AIArguments, AIHandle, AIModel } from './BaseAiModel';
 
-interface FluxAiModelParams {
-  sender: string;
-  prompt: string;
-}
+/* Flux Model */
+class FluxModel extends AIModel<AIArguments, AIHandle> {
+  public endPointAPI: string = 'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev';
+  private headers;
 
-type HandleType = (res: Buffer, err?: string) => Promise<void>;
-
-class FluxModel extends AIModel<FluxAiModelParams, HandleType> {
   constructor() {
-    super(ENV.HFKey, 'FLUX');
+    super(ENV.API_KEY_HF, 'FLUX');
+
+    this.headers = {
+      Authorization: `Bearer ${this.getApiKey()}`,
+      'Content-Type': 'application/json'
+    };
   }
 
-  async sendMessage({ sender, prompt }: FluxAiModelParams, handle: HandleType): Promise<any> {
-    const spinner = useSpinner(MessageTemplates.requestStr(this.aiModelName, sender, prompt));
-    spinner.start();
+  public async generateImage(prompt: string): Promise<any> {
+    const response = await fetch(this.endPointAPI, {
+      headers: this.headers,
+      method: 'POST',
+      body: JSON.stringify({
+        inputs: prompt
+      })
+    });
+
+    const buffer = await (await response.blob()).arrayBuffer();
+    const base64Img = Buffer.from(buffer);
+
+    return base64Img;
+  }
+
+  async sendMessage({ prompt }: AIArguments, handle: AIHandle): Promise<any> {
     try {
-      const startTime = Date.now();
+      const imageData = await this.generateImage(prompt);
 
-      const response = await fetch(
-        'https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell',
-        {
-          headers: {
-            Authorization: `Bearer ${this.apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          body: JSON.stringify({
-            inputs: prompt
-          })
-        }
-      );
-
-      const buffer = await (await response.blob()).arrayBuffer();
-      const base64Img = Buffer.from(buffer);
-
-      await handle(base64Img);
-
-      spinner.succeed(
-        MessageTemplates.reqSucceedStr(
-          this.aiModelName,
-          sender,
-          '<Image Buffer>',
-          Date.now() - startTime
-        )
-      );
+      await handle({ image: imageData });
     } catch (err) {
-      spinner.fail(
-        MessageTemplates.reqFailStr(
-          this.aiModelName,
-          'at FluxModel.ts sendMessage(prompt, msg)',
-          err
-        )
-      );
-      await handle(Buffer.from(''), 'An error occur please see console for more information.');
+      await handle('', 'An error occur please see console for more information.');
     }
   }
 }
