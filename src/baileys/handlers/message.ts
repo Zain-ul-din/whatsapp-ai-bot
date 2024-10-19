@@ -4,6 +4,7 @@ import { AIModels } from './../../types/AiModels';
 import { Util } from './../../util/Util';
 
 /* Models */
+import { StabilityModel } from '../../models/StabilityModel';
 import { ChatGPTModel } from './../../models/OpenAIModel';
 import { GeminiModel } from './../../models/GeminiModel';
 import { FluxModel } from './../../models/FluxModel';
@@ -13,7 +14,8 @@ import { ENV } from '../env';
 const modelTable: Record<AIModels, any> = {
   ChatGPT: ENV.OPENAI_ENABLED ? new ChatGPTModel() : null,
   Gemini: ENV.GEMINI_ENABLED ? new GeminiModel() : null,
-  FLUX: ENV.HF_ENABLED ? new FluxModel() : null
+  FLUX: ENV.HF_ENABLED ? new FluxModel() : null,
+  Stability: ENV.STABILITY_ENABLED ? new StabilityModel() : null
 };
 
 // handles message

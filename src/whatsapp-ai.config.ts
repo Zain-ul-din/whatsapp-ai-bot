@@ -22,6 +22,10 @@ const config: Config = {
     FLUX: {
       prefix: ENV.HF_PREFIX,
       enable: ENV.HF_ENABLED
+    },
+    Stability: {
+      prefix: ENV.STABILITY_PREFIX,
+      enable: ENV.STABILITY_ENABLED,
     }
     /*
     Custom: [

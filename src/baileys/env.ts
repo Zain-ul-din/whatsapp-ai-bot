@@ -13,6 +13,7 @@ interface EnvInterface {
   API_KEY_DREAMSTUDIO?: string;
   API_KEY_GEMINI?: string;
   API_KEY_HF?: string;
+  API_KEY_STABILITY?: string;
 
   // MongoDB
   MONGO_ENABLED: boolean;
@@ -38,6 +39,12 @@ interface EnvInterface {
   HF_PREFIX?: string;
   HF_ENABLED: boolean;
   HF_ICON_PREFIX?: string;
+
+  // // Stability
+  STABILITY_PREFIX?: string;
+  STABILITY_ENABLED: boolean;
+  STABILITY_ICON_PREFIX?: string;
+  STABILITY_MODEL: string;
 }
 
 export const ENV: EnvInterface = {
@@ -49,6 +56,7 @@ export const ENV: EnvInterface = {
   API_KEY_DREAMSTUDIO: process.env.API_KEY_DREAMSTUDIO,
   API_KEY_GEMINI: process.env.API_KEY_GEMINI,
   API_KEY_HF: process.env.API_KEY_HF,
+  API_KEY_STABILITY: process.env.API_KEY_STABILITY,
   MONGO_ENABLED: process.env.MONGO_ENABLED === 'True',
   MONGO_URL: process.env.MONGO_URL,
 
@@ -64,5 +72,9 @@ export const ENV: EnvInterface = {
   GEMINI_ICON_PREFIX: process.env.GEMINI_ICON_PREFIX,
   HF_PREFIX: process.env.HF_PREFIX,
   HF_ENABLED: process.env.HF_ENABLED === 'True',
-  HF_ICON_PREFIX: process.env.HF_ICON_PREFIX
+  HF_ICON_PREFIX: process.env.HF_ICON_PREFIX,
+  STABILITY_PREFIX: process.env.STABILITY_PREFIX,
+  STABILITY_ENABLED: process.env.STABILITY_ENABLED === 'True',
+  STABILITY_ICON_PREFIX: process.env.STABILITY_ICON_PREFIX,
+  STABILITY_MODEL: process.env.STABILITY_MODEL || 'core'
 };
