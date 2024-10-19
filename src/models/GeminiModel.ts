@@ -5,11 +5,7 @@ import {
   GenerativeModel,
   GoogleGenerativeAI
 } from '@google/generative-ai';
-import {
-  AnyMessageContent,
-  downloadMediaMessage,
-  generateWAMessage
-} from '@whiskeysockets/baileys';
+import { downloadMediaMessage } from '@whiskeysockets/baileys';
 
 /* Local modules */
 import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
