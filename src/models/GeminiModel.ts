@@ -68,8 +68,6 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   async sendMessage({ sender, prompt, metadata }: AIArguments, handle: AIHandle) {
     try {
       let message = '';
-      console.log(metadata.quoteMetaData);
-
       if (metadata.isQuoted) {
         if (metadata.quoteMetaData.type === 'image') {
           message = this.iconPrefix + (await this.generateImageCompletion(prompt, metadata));
