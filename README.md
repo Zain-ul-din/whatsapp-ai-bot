@@ -1,9 +1,3 @@
-
-> [!NOTE]
-> We are switching to the [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys) library for our bot because it's lightweight and easy to deploy.
->
-> This branch is still under construction 🚧. Currently, we only support the models listed below, but support for new models will be added soon.
-
 <div align="center">
 
 # <img src="https://github.com/Zain-ul-din/whatsapp-ai-bot/assets/78583049/d31339cf-b4ae-450e-95b9-53d21e4641a0" width="35" height="35"/> WhatsApp AI Bot 🚀
