@@ -4,7 +4,9 @@ import { AIModels } from '../types/AiModels';
 import config from '../whatsapp-ai.config';
 
 export class Util {
-  public static getModelByPrefix(message: string): AIModels | undefined {
+  public static getModelByPrefix(
+    message: string
+  ): { modelName: AIModels; prefix: string } | undefined {
     for (let [modelName, model] of Object.entries(config.models)) {
       const currentModel = model as IModelConfig;
       if (!currentModel.enable) continue;
@@ -12,7 +14,7 @@ export class Util {
       if (
         message.toLocaleLowerCase().startsWith((currentModel.prefix as string).toLocaleLowerCase())
       ) {
-        return modelName as AIModels;
+        return { modelName: modelName as AIModels, prefix: currentModel.prefix as string };
       }
     }
 

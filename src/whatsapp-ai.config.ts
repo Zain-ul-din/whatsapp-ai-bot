@@ -8,12 +8,10 @@ const config: Config = {
     ChatGPT: {
       prefix: ENV.OPENAI_PREFIX,
       enable: ENV.OPENAI_ENABLED,
-      modelToUse: 'gpt-3.5-turbo', // See all models here https://platform.openai.com/docs/models
-      settings: {
-        dalle_enabled: ENV.DALLE_ENABLED,
-        dalle_prefix: ENV.DALLE_PREFIX,
-        dalle_use_3: ENV.DALLE_USE_3
-      }
+    },
+    Dalle: {
+      prefix: ENV.DALLE_PREFIX,
+      enable: ENV.DALLE_ENABLED,
     },
     Gemini: {
       prefix: ENV.GEMINI_PREFIX,
