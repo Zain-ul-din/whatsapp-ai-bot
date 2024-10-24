@@ -28,17 +28,17 @@ class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
     });
 
     this.Dalle = new OpenAI({
-      apiKey: ENV.API_KEY_OPENAI_DALLE
+      apiKey: ENV.API_KEY_OPENAI_DALLE || ENV.API_KEY_OPENAI
     });
 
-    this.Dalle3 = config.models.ChatGPT?.settings.dalle_use_3;
+    this.Dalle3 = ENV.DALLE_USE_3;
   }
 
   /* Methods */
   public async generateCompletion(user: string): Promise<ChatCompletionMessage> {
     const completion = await this.OpenAI.chat.completions.create({
       messages: this.history[user],
-      model: config.models.ChatGPT?.modelToUse?.toString() || 'gpt-3.5-turbo'
+      model: ENV.OPENAI_MODEL
     });
 
     const message = completion.choices[0].message;
@@ -60,18 +60,29 @@ class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
     return { url: resInfo.url as string, caption: resInfo.revised_prompt as string };
   }
 
-  public async sendMessage({ sender, prompt }: AIArguments, handle: AIHandle): Promise<any> {
+  public async sendMessage(
+    { sender, prompt, prefix }: AIArguments,
+    handle: AIHandle
+  ): Promise<any> {
     try {
-      if (!this.sessionExists(sender)) {
-        this.sessionCreate(sender);
-      }
-      this.sessionAddMessage(sender, { role: 'user', content: prompt });
+      // Use Dalle
+      if (ENV.DALLE_ENABLED && prefix === ENV.DALLE_PREFIX) {
+        const res = await this.generateImage(prompt);
+        await handle(res);
 
-      const completion = await this.generateCompletion(sender);
-      const res = completion.content || '';
-      await handle({ text: res });
+        // Use ChatGPT
+      } else {
+        if (!this.sessionExists(sender)) {
+          this.sessionCreate(sender);
+        }
+        this.sessionAddMessage(sender, { role: 'user', content: prompt });
+
+        const completion = await this.generateCompletion(sender);
+        const res = completion.content || '';
+        await handle({ text: res });
+      }
     } catch (err) {
-      await handle('', 'An error occur please see console for more information.');
+      await handle('', err as string);
     }
   }
 }

@@ -3,15 +3,12 @@ import { AIModels, AIModelsName } from './AiModels';
 export interface IModelConfig {
   prefix: string | undefined;
   enable: boolean;
-  modelToUse?: string;
-  settings?: any;
 }
 
 export interface IModelType extends IModelConfig {
   modelName: string;
   prefix: string;
   context: string;
-  modelToUse?: AIModelsName;
   includeSender?: boolean;
 }
 

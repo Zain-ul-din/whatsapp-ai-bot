@@ -21,6 +21,7 @@ interface EnvInterface {
 
   // Services
   // // OpenAI
+  OPENAI_MODEL: string;
   OPENAI_PREFIX?: string;
   OPENAI_ENABLED: boolean;
   OPENAI_ICON_PREFIX?: string;
@@ -59,7 +60,7 @@ export const ENV: EnvInterface = {
   API_KEY_STABILITY: process.env.API_KEY_STABILITY,
   MONGO_ENABLED: process.env.MONGO_ENABLED === 'True',
   MONGO_URL: process.env.MONGO_URL,
-
+  OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
   OPENAI_PREFIX: process.env.OPENAI_PREFIX,
   OPENAI_ENABLED: process.env.OPENAI_ENABLED === 'True',
   OPENAI_ICON_PREFIX: process.env.OPENAI_ICON_PREFIX,
