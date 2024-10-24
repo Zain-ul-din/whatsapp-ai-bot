@@ -64,7 +64,7 @@ class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
     const image: Image = res.data[0];
     const base64Img = Buffer.from(image.b64_json as string, 'base64');
 
-    return { image: base64Img, caption: image.revised_prompt || '' };
+    return { image: base64Img, caption: image.revised_prompt || prompt };
   }
 
   public async sendMessage({ sender, prompt, prefix }: AIArguments, handle: AIHandle) {
