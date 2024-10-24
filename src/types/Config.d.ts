@@ -1,4 +1,4 @@
-import { AIModels, AIModelsName } from './AiModels';
+import { AIModels } from './AiModels';
 
 export interface IModelConfig {
   prefix: string | undefined;
