@@ -30,6 +30,7 @@ interface EnvInterface {
   DALLE_ENABLED: boolean;
   DALLE_ICON_PREFIX?: string;
   DALLE_USE_3: boolean;
+  DALLE_SIZE: string;
 
   // // Google Gemini
   GEMINI_PREFIX?: string;
@@ -58,22 +59,29 @@ export const ENV: EnvInterface = {
   API_KEY_GEMINI: process.env.API_KEY_GEMINI,
   API_KEY_HF: process.env.API_KEY_HF,
   API_KEY_STABILITY: process.env.API_KEY_STABILITY,
+
   MONGO_ENABLED: process.env.MONGO_ENABLED === 'True',
   MONGO_URL: process.env.MONGO_URL,
+
   OPENAI_MODEL: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
   OPENAI_PREFIX: process.env.OPENAI_PREFIX,
   OPENAI_ENABLED: process.env.OPENAI_ENABLED === 'True',
   OPENAI_ICON_PREFIX: process.env.OPENAI_ICON_PREFIX,
+
   DALLE_PREFIX: process.env.DALLE_PREFIX,
   DALLE_ENABLED: process.env.DALLE_ENABLED === 'True',
   DALLE_ICON_PREFIX: process.env.DALLE_ICON_PREFIX,
   DALLE_USE_3: process.env.DALLE_USE_3 === 'True',
+  DALLE_SIZE: process.env.DALLE_SIZE || '512x512',
+
   GEMINI_PREFIX: process.env.GEMINI_PREFIX,
   GEMINI_ENABLED: process.env.GEMINI_ENABLED === 'True',
   GEMINI_ICON_PREFIX: process.env.GEMINI_ICON_PREFIX,
+
   HF_PREFIX: process.env.HF_PREFIX,
   HF_ENABLED: process.env.HF_ENABLED === 'True',
   HF_ICON_PREFIX: process.env.HF_ICON_PREFIX,
+
   STABILITY_PREFIX: process.env.STABILITY_PREFIX,
   STABILITY_ENABLED: process.env.STABILITY_ENABLED === 'True',
   STABILITY_ICON_PREFIX: process.env.STABILITY_ICON_PREFIX,
