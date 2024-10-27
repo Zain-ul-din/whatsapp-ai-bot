@@ -5,8 +5,17 @@ import config from '../whatsapp-ai.config';
 
 export class Util {
   public static getModelByPrefix(
-    message: string
+    message: string,
+    fromMe: Boolean
   ): { modelName: AIModels; prefix: string } | undefined {
+    if (fromMe) {
+      const defaultModelName = config.prefix.defaultModel;
+      const defaultModel = config.models[defaultModelName];
+      if (defaultModel && defaultModel.enable) {
+        return { modelName: defaultModelName as AIModels, prefix: defaultModel.prefix as string };
+      }
+    }
+
     for (let [modelName, model] of Object.entries(config.models)) {
       const currentModel = model as IModelConfig;
       if (!currentModel.enable) continue;
