@@ -32,7 +32,10 @@ if (ENV.DALLE_ENABLED && ENV.OPENAI_ENABLED) {
 
 // handles message
 export async function handleMessage({ client, msg, metadata }: MessageHandlerParams) {
-  const modelInfo: ModelByPrefix | undefined = Util.getModelByPrefix(metadata.text);
+  const modelInfo: ModelByPrefix | undefined = Util.getModelByPrefix(
+    metadata.text,
+    metadata.fromMe
+  );
   if (!modelInfo) {
     if (ENV.Debug) {
       console.log("[Debug] Model '" + modelInfo + "' not found");
