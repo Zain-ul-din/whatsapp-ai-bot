@@ -27,7 +27,7 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 | Dalle 2 & 3 | [OpenAI](https://platform.openai.com/docs/api-reference/images/create) | Text to Image | !dalle |
 | Flux   | [Hugging Face](https://huggingface.co/black-forest-labs/FLUX.1-dev) | Text to Image | !flux |
 | Stability AI | [Stability AI](https://platform.stability.ai/docs/getting-started/stable-image) | Text to Image | !stability |
-| Custom | Base Provider | Text to Text | !your_prefix | 
+| Custom | Base Provider | Text to Text | !wa | 
 # Demo
 
 ### Gemini
