@@ -17,6 +17,10 @@
 /session
 /auth_info_baileys
 
+# meta files
 
+pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+.vscode
