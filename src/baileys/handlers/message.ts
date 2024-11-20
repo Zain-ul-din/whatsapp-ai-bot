@@ -9,11 +9,8 @@ import { ChatGPTModel } from './../../models/OpenAIModel';
 import { GeminiModel } from './../../models/GeminiModel';
 import { FluxModel } from './../../models/FluxModel';
 import { ENV } from '../env';
-
-interface ModelByPrefix {
-  modelName: AIModels;
-  prefix: string;
-}
+import config from '../../whatsapp-ai.config';
+import { CustomAIModel } from '../../models/CustomModel';
 
 /* Declare models */
 const modelTable: Record<AIModels, any> = {
@@ -21,7 +18,10 @@ const modelTable: Record<AIModels, any> = {
   Gemini: ENV.GEMINI_ENABLED ? new GeminiModel() : null,
   FLUX: ENV.HF_ENABLED ? new FluxModel() : null,
   Stability: ENV.STABILITY_ENABLED ? new StabilityModel() : null,
-  Dalle: null
+  Dalle: null,
+  Custom: config.models.Custom
+    ? config.models.Custom.map((model) => new CustomAIModel(model))
+    : null
 };
 
 if (ENV.DALLE_ENABLED && ENV.OPENAI_ENABLED) {
@@ -32,10 +32,8 @@ if (ENV.DALLE_ENABLED && ENV.OPENAI_ENABLED) {
 
 // handles message
 export async function handleMessage({ client, msg, metadata }: MessageHandlerParams) {
-  const modelInfo: ModelByPrefix | undefined = Util.getModelByPrefix(
-    metadata.text,
-    metadata.fromMe
-  );
+  const modelInfo = Util.getModelByPrefix(metadata.text);
+
   if (!modelInfo) {
     if (ENV.Debug) {
       console.log("[Debug] Model '" + modelInfo + "' not found");
@@ -43,10 +41,25 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
     return;
   }
 
-  const model = modelTable[modelInfo.modelName];
+  let model = modelTable[modelInfo.name];
+  let prefix = modelInfo.name !== 'Custom' ? modelInfo.meta.prefix : '';
+
+  if (modelInfo.name === 'Custom') {
+    if (!modelInfo.customMeta) return;
+    const customModels = model as Array<CustomAIModel>;
+    const potentialCustomModel = customModels.find(
+      (model) => model.modelName === modelInfo.customMeta?.meta.modelName
+    );
+
+    model = potentialCustomModel;
+    prefix = modelInfo.customMeta.meta.prefix;
+  }
+
   if (!model) {
     if (ENV.Debug) {
-      console.log("[Debug] Model '" + modelInfo.modelName + "' is disabled or not found");
+      console.log(
+        "[Debug] Model '" + JSON.stringify(modelInfo, null, 2) + "' is disabled or not found"
+      );
     }
     return;
   }
@@ -59,7 +72,12 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
   );
 
   model.sendMessage(
-    { sender: metadata.sender, prompt: prompt, metadata: metadata, prefix: modelInfo.prefix },
+    {
+      sender: metadata.sender,
+      prompt: prompt,
+      metadata: metadata,
+      prefix: prefix
+    },
     async (res: any, err: any) => {
       if (err) {
         client.sendMessage(metadata.remoteJid, {

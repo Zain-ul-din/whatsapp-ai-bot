@@ -8,7 +8,16 @@ type AIMetaData = {
   sender: string;
   senderName?: string;
   fromMe: boolean;
-  msgType: 'unknown' | 'text' | 'extendedText' | 'image' | 'video' | 'document' | 'contact' | 'location' | 'audio';
+  msgType:
+    | 'unknown'
+    | 'text'
+    | 'extendedText'
+    | 'image'
+    | 'video'
+    | 'document'
+    | 'contact'
+    | 'location'
+    | 'audio';
   type: MessageUpsertType;
   isQuoted: boolean;
   quoteMetaData: {
@@ -63,12 +72,24 @@ abstract class AIModel<AIArguments, CallBack> {
     this.iconPrefix = icon === undefined ? '' : '[' + icon + '] ';
   }
 
-  public getApiKey(): string { return this.apiKey };
-  public sessionCreate(user: string): void { this.history[user] = [] };
-  public sessionRemove(user: string): void { delete this.history[user] };
-  public sessionExists(user: string): boolean { return this.history[user] !== undefined };
-  public sessionAddMessage(user: string, args: any): void { this.history[user].push(args) };
-  public addPrefixIcon(text: string): string { return this.iconPrefix + text };
+  public getApiKey(): string {
+    return this.apiKey;
+  }
+  public sessionCreate(user: string): void {
+    this.history[user] = [];
+  }
+  public sessionRemove(user: string): void {
+    delete this.history[user];
+  }
+  public sessionExists(user: string): boolean {
+    return this.history[user] !== undefined;
+  }
+  public sessionAddMessage(user: string, args: any): void {
+    this.history[user].push(args);
+  }
+  public addPrefixIcon(text: string): string {
+    return this.iconPrefix + text;
+  }
 
   abstract sendMessage(args: AIArguments, handle: CallBack): Promise<any>;
 }

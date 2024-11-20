@@ -5,11 +5,19 @@ export interface IModelConfig {
   enable: boolean;
 }
 
+export type SupportedBaseModels = keyof Pick<
+  {
+    [key in AIModels]: string;
+  },
+  'ChatGPT' | 'Gemini'
+>;
+
 export interface IModelType extends IModelConfig {
   modelName: string;
   prefix: string;
   context: string;
   includeSender?: boolean;
+  baseModel: SupportedBaseModels;
 }
 
 export interface IDefaultConfig {
@@ -20,7 +28,7 @@ export interface IDefaultConfig {
 
 export type Config = {
   models: {
-    [key in AIModels]?: key extends 'Custom' ? Array<IModelType> | [] : IModelConfig | null;
+    [key in AIModels]?: key extends 'Custom' ? Array<IModelType> : IModelConfig;
   };
 } & {
   prefix: IDefaultConfig;

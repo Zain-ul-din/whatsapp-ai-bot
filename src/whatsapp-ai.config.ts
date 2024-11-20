@@ -7,11 +7,11 @@ const config: Config = {
   models: {
     ChatGPT: {
       prefix: ENV.OPENAI_PREFIX,
-      enable: ENV.OPENAI_ENABLED,
+      enable: ENV.OPENAI_ENABLED
     },
     Dalle: {
       prefix: ENV.DALLE_PREFIX,
-      enable: ENV.DALLE_ENABLED,
+      enable: ENV.DALLE_ENABLED
     },
     Gemini: {
       prefix: ENV.GEMINI_PREFIX,
@@ -23,24 +23,22 @@ const config: Config = {
     },
     Stability: {
       prefix: ENV.STABILITY_PREFIX,
-      enable: ENV.STABILITY_ENABLED,
-    }
-    /*
+      enable: ENV.STABILITY_ENABLED
+    },
     Custom: [
+      // custom model
       {
-        // Custom Model
-        modelName: 'whatsapp-ai-bot', // Name of the custom model
-        prefix: '!bot', // Prefix for the custom model
-        enable: true, // Whether the custom model is enabled or not
+        modelName: 'whatsapp-ai-bot',
+        prefix: '!wa',
+        enable: true,
         //
         // context: "file-path (.txt, .text, .md)",
         // context: "text url",
         // context: "text"
-        
-        context: './static/whatsapp-ai-bot.md' // Context for the custom model
+        context: './docs/wa-ai-bot.md',
+        baseModel: 'Gemini'
       }
     ]
-      */
   },
   prefix: {
     enabled: true, // If you disable this, the bot will reply to all messages
