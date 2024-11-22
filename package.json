@@ -12,6 +12,7 @@
     "build": "npx yarn"
   },
   "devDependencies": {
+    "@types/invariant": "^2.2.37",
     "@types/node": "^18.14.0",
     "@types/node-fetch": "^2.6.2",
     "prettier": "^2.8.4",
@@ -24,6 +25,7 @@
     "@whiskeysockets/baileys": "^6.7.7",
     "@whiskeysockets/libsignal-node": "github:WhiskeySockets/libsignal-node",
     "dotenv": "^16.0.3",
+    "invariant": "^2.2.4",
     "mongo-baileys": "^1.0.1",
     "mongodb": "^6.8.0",
     "openai": "^4.56.0",

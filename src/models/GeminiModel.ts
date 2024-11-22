@@ -10,20 +10,19 @@ import { downloadMediaMessage } from '@whiskeysockets/baileys';
 /* Local modules */
 import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
 import { ENV } from '../baileys/env';
+import invariant from 'invariant';
 
 /* Gemini Model */
 class GeminiModel extends AIModel<AIArguments, AIHandle> {
   /* Variables */
-  private generativeModel: GenerativeModel;
+  private generativeModel?: GenerativeModel;
   private Gemini: GoogleGenerativeAI;
   public chats: { [from: string]: ChatSession };
+  public instructions: string | undefined;
 
   public constructor() {
     super(ENV.API_KEY_GEMINI, 'Gemini', ENV.GEMINI_ICON_PREFIX);
     this.Gemini = new GoogleGenerativeAI(ENV.API_KEY_GEMINI as string);
-
-    // https://ai.google.dev/gemini-api/docs/models/gemini
-    this.generativeModel = this.Gemini.getGenerativeModel({ model: 'gemini-1.5-flash' });
     this.chats = {};
   }
 
@@ -31,7 +30,7 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   public async generateCompletion(user: string, prompt: string): Promise<string> {
     if (!this.sessionExists(user)) {
       this.sessionCreate(user);
-      this.chats[user] = this.generativeModel.startChat();
+      this.chats[user] = this.generativeModel!.startChat();
     }
 
     const chat = this.chats[user];
@@ -47,7 +46,18 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
     };
   }
 
+  private initGenerativeModel() {
+    // https://ai.google.dev/gemini-api/docs/models/gemini
+    this.generativeModel = this.Gemini.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      systemInstruction: this.instructions
+    });
+  }
+
   public async generateImageCompletion(prompt: string, metadata: AIMetaData): Promise<string> {
+    this.initGenerativeModel();
+    invariant(this.generativeModel, 'Unable to initialize Gemini Generative model');
+
     const { mimeType } = metadata.quoteMetaData.imgMetaData;
     if (mimeType === 'image/jpeg') {
       const buffer = await downloadMediaMessage(

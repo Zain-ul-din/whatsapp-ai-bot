@@ -24,6 +24,8 @@ class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
   private OpenAI: OpenAI;
   public DalleSize: DalleSizeImage;
 
+  public instructions: string | undefined = undefined;
+
   public constructor() {
     super(ENV.API_KEY_OPENAI, 'ChatGPT');
 
@@ -42,7 +44,10 @@ class ChatGPTModel extends AIModel<AIArguments, AIHandle> {
   /* Methods */
   public async generateCompletion(user: string): Promise<ChatCompletionMessage> {
     const completion = await this.OpenAI.chat.completions.create({
-      messages: this.history[user],
+      messages: [
+        ...(this.instructions ? [{ role: 'system', content: this.instructions }] : []),
+        ...this.history[user]
+      ],
       model: ENV.OPENAI_MODEL
     });
 
