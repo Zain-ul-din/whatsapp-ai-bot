@@ -25,13 +25,14 @@ class CustomAIModel extends AIModel<AIArguments, AIHandle> {
     this.chatGPTModel = new ChatGPTModel();
   }
 
-  private static constructInstructAblePrompt({
+  private constructInstructAblePrompt({
     prompt,
     instructions
   }: {
     prompt: string;
     instructions: string;
   }) {
+    if (!this.self.dangerouslyAllowFewShotApproach) return prompt;
     return `
 <context>
   ${instructions}
@@ -46,16 +47,22 @@ prompt:
   public async sendMessage({ prompt, ...rest }: AIArguments, handle: AIHandle) {
     try {
       const instructions = await CustomAIModel.readContext(this.self);
-      const promptWithInstructions = CustomAIModel.constructInstructAblePrompt({
+      const promptWithInstructions = this.constructInstructAblePrompt({
         prompt,
         instructions: instructions
       });
 
       switch (this.selectedBaseModel) {
         case 'ChatGPT':
+          this.chatGPTModel.instructions = !this.self.dangerouslyAllowFewShotApproach
+            ? instructions
+            : undefined;
           await this.chatGPTModel.sendMessage({ prompt: promptWithInstructions, ...rest }, handle);
           break;
         case 'Gemini':
+          this.geminiModel.instructions = !this.self.dangerouslyAllowFewShotApproach
+            ? instructions
+            : undefined;
           await this.geminiModel.sendMessage({ prompt: promptWithInstructions, ...rest }, handle);
           break;
       }

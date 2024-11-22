@@ -18,6 +18,7 @@ export interface IModelType extends IModelConfig {
   context: string;
   includeSender?: boolean;
   baseModel: SupportedBaseModels;
+  dangerouslyAllowFewShotApproach?: boolean;
 }
 
 export interface IDefaultConfig {
