@@ -55,8 +55,6 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   }
 
   public async generateImageCompletion(prompt: string, metadata: AIMetaData): Promise<string> {
-    this.initGenerativeModel();
-    invariant(this.generativeModel, 'Unable to initialize Gemini Generative model');
 
     const { mimeType } = metadata.quoteMetaData.imgMetaData;
     if (mimeType === 'image/jpeg') {
@@ -66,7 +64,7 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
         {}
       );
       const imageParts = this.createGenerativeContent(buffer, mimeType);
-      const result = await this.generativeModel.generateContent([prompt, imageParts]);
+      const result = await this.generativeModel!.generateContent([prompt, imageParts]);
       const resultText = result.response.text();
 
       return resultText;
@@ -76,6 +74,9 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   }
 
   async sendMessage({ sender, prompt, metadata }: AIArguments, handle: AIHandle) {
+    this.initGenerativeModel();
+    invariant(this.generativeModel, 'Unable to initialize Gemini Generative model');
+    
     try {
       let message = '';
       if (metadata.isQuoted) {
