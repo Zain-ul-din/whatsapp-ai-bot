@@ -6,6 +6,7 @@ configEnv();
 interface EnvInterface {
   Debug: boolean;
   Processing: string;
+  IGNORE_SELF_MESSAGES: boolean;
 
   // Model Services
   API_KEY_OPENAI?: string;
@@ -52,6 +53,7 @@ interface EnvInterface {
 export const ENV: EnvInterface = {
   Debug: process.env.DEBUG === 'True',
   Processing: process.env.PROCESSING || 'Processing...',
+  IGNORE_SELF_MESSAGES: process.env.IGNORE_SELF_MESSAGES === 'True',
 
   API_KEY_OPENAI: process.env.API_KEY_OPENAI,
   API_KEY_OPENAI_DALLE: process.env.API_KEY_OPENAI_DALLE || process.env.API_KEY_OPENAI,
