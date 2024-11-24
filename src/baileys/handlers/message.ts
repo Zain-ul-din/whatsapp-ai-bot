@@ -101,10 +101,3 @@ export async function handleMessage({ client, msg, metadata }: MessageHandlerPar
     }
   );
 }
-
-// handles message from self
-export async function handlerMessageFromMe({ metadata, client, msg, type }: MessageHandlerParams) {
-  // if (metadata.fromMe && metadata.isQuoted) return;
-  // if (metadata.isQuoted && Util.getModelByPrefix(metadata.text)) return;
-  await handleMessage({ metadata, client, msg, type });
-}

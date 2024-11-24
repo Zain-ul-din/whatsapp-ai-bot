@@ -1,6 +1,7 @@
 import makeWASocket, { MessageUpsertType, WAMessage } from '@whiskeysockets/baileys';
 import useMessageParser from '../hooks/useMessageParser';
-import { handleMessage, handlerMessageFromMe } from './message';
+import { handleMessage } from './message';
+import { ENV } from '../env';
 
 export function messagesHandler({
   client,
@@ -21,10 +22,9 @@ export function messagesHandler({
         if (!metadata) return;
         if (metadata.msgType === 'unknown') return;
         if (metadata.isGroup && metadata.groupMetaData.groupIsLocked) return;
+        if (metadata.fromMe && ENV.IGNORE_SELF_MESSAGES) return;
 
-        await (metadata.fromMe
-          ? handlerMessageFromMe({ client, msg, metadata, type })
-          : handleMessage({ client, msg, metadata, type }));
+        await handleMessage({ client, msg, metadata, type });
       } catch (_) {}
     })
   );

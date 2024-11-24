@@ -12,6 +12,14 @@ import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
 import { ENV } from '../baileys/env';
 import invariant from 'invariant';
 
+interface imgMetaData {
+  url: string;
+  mimeType: string;
+  caption: string;
+}
+
+const validMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
+
 /* Gemini Model */
 class GeminiModel extends AIModel<AIArguments, AIHandle> {
   /* Variables */
@@ -19,6 +27,14 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
   private Gemini: GoogleGenerativeAI;
   public chats: { [from: string]: ChatSession };
   public instructions: string | undefined;
+
+  private initGenerativeModel() {
+    // https://ai.google.dev/gemini-api/docs/models/gemini
+    this.generativeModel = this.Gemini.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      systemInstruction: this.instructions
+    });
+  }
 
   public constructor() {
     super(ENV.API_KEY_GEMINI, 'Gemini', ENV.GEMINI_ICON_PREFIX);
@@ -46,23 +62,14 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
     };
   }
 
-  private initGenerativeModel() {
-    // https://ai.google.dev/gemini-api/docs/models/gemini
-    this.generativeModel = this.Gemini.getGenerativeModel({
-      model: 'gemini-1.5-flash',
-      systemInstruction: this.instructions
-    });
-  }
-
-  public async generateImageCompletion(prompt: string, metadata: AIMetaData): Promise<string> {
-
-    const { mimeType } = metadata.quoteMetaData.imgMetaData;
-    if (mimeType === 'image/jpeg') {
-      const buffer = await downloadMediaMessage(
-        { message: metadata.quoteMetaData.message } as any,
-        'buffer',
-        {}
-      );
+  public async generateImageCompletion(
+    prompt: string,
+    imgMetaData: imgMetaData,
+    message: any
+  ): Promise<string> {
+    const { mimeType } = imgMetaData;
+    if (validMimeTypes.includes(mimeType)) {
+      const buffer = await downloadMediaMessage({ message: message } as any, 'buffer', {});
       const imageParts = this.createGenerativeContent(buffer, mimeType);
       const result = await this.generativeModel!.generateContent([prompt, imageParts]);
       const resultText = result.response.text();
@@ -70,24 +77,40 @@ class GeminiModel extends AIModel<AIArguments, AIHandle> {
       return resultText;
     }
 
-    return '';
+    return 'The image is not a valid image type.';
   }
 
   async sendMessage({ sender, prompt, metadata }: AIArguments, handle: AIHandle) {
     this.initGenerativeModel();
     invariant(this.generativeModel, 'Unable to initialize Gemini Generative model');
-    
+
     try {
       let message = '';
       if (metadata.isQuoted) {
-        if (metadata.quoteMetaData.type === 'image') {
-          message = this.iconPrefix + (await this.generateImageCompletion(prompt, metadata));
+        if (metadata.quoteMetaData.hasImage) {
+          message =
+            this.iconPrefix +
+            (await this.generateImageCompletion(
+              prompt,
+              metadata.quoteMetaData.imgMetaData,
+              metadata.quoteMetaData.message
+            ));
         } else {
-          prompt = 'Quoted Message:\n' + metadata.quoteMetaData.text + '---\nMessage:\n' + prompt;
+          prompt = 'Quoted Message:\n' + metadata.quoteMetaData.text + '\n---\nMessage:\n' + prompt;
           message = this.iconPrefix + (await this.generateCompletion(sender, prompt));
         }
       } else {
-        message = this.iconPrefix + (await this.generateCompletion(sender, prompt));
+        if (metadata.hasImage) {
+          message =
+            this.iconPrefix +
+            (await this.generateImageCompletion(
+              prompt,
+              metadata.imgMetaData,
+              metadata.message.message
+            ));
+        } else {
+          message = this.iconPrefix + (await this.generateCompletion(sender, prompt));
+        }
       }
 
       handle({ text: message });

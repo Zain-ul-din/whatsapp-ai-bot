@@ -49,6 +49,7 @@ export default async function useMessageParser(
     senderName: message.pushName,
     fromMe,
     msgType,
+    message,
     type,
     isQuoted: false,
     quoteMetaData: {
@@ -56,6 +57,7 @@ export default async function useMessageParser(
       message: {},
       text: '',
       type: 'text',
+      hasImage: false,
       imgMetaData: {
         url: '',
         mimeType: '',
@@ -71,11 +73,13 @@ export default async function useMessageParser(
       groupName: '',
       groupIsLocked: false
     },
+    hasImage: false,
     imgMetaData: {
       url: '',
       mimeType: '',
       caption: ''
     },
+    hasAudio: false,
     audioMetaData: {
       url: '',
       mimeType: ''
@@ -84,20 +88,18 @@ export default async function useMessageParser(
 
   // Handle image messages
   if (imageMessage) {
-    metaData.msgType = 'image';
-    if (imageMessage.url) metaData.imgMetaData.url = imageMessage.url;
-    if (imageMessage.mimetype) metaData.imgMetaData.mimeType = imageMessage.mimetype;
-    if (imageMessage.caption) {
-      metaData.imgMetaData.caption = imageMessage.caption;
-      metaData.text = imageMessage.caption;
-    }
+    metaData.hasImage = true;
+    metaData.imgMetaData.url = imageMessage.url || '';
+    metaData.imgMetaData.mimeType = imageMessage.mimetype || '';
+    metaData.imgMetaData.caption = imageMessage.caption || '';
+    metaData.text = imageMessage.caption || '';
   }
 
   // Handle audio messages
   if (audioMessage) {
-    metaData.msgType = 'audio';
-    if (audioMessage.url) metaData.audioMetaData.url = audioMessage.url;
-    if (audioMessage.mimetype) metaData.audioMetaData.mimeType = audioMessage.mimetype;
+    metaData.hasAudio = true;
+    metaData.audioMetaData.url = audioMessage.url || '';
+    metaData.audioMetaData.mimeType = audioMessage.mimetype || '';
   }
 
   // gather context info
@@ -112,6 +114,7 @@ export default async function useMessageParser(
       metaData.quoteMetaData.message = contextInfo.quotedMessage || {};
 
       if (contextInfo.quotedMessage.imageMessage) {
+        metaData.quoteMetaData.hasImage = true;
         metaData.quoteMetaData.type = 'image';
         metaData.quoteMetaData.imgMetaData.url = contextInfo.quotedMessage.imageMessage.url || '';
         metaData.quoteMetaData.imgMetaData.mimeType =
@@ -128,6 +131,8 @@ export default async function useMessageParser(
     metaData.groupMetaData.groupName = groupMetadata.subject;
     metaData.groupMetaData.groupIsLocked = groupMetadata.restrict || false;
   }
+
+  metaData.message = message;
 
   return metaData;
 }

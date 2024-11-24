@@ -8,6 +8,7 @@ type AIMetaData = {
   sender: string;
   senderName?: string;
   fromMe: boolean;
+  message: any;
   msgType:
     | 'unknown'
     | 'text'
@@ -25,6 +26,7 @@ type AIMetaData = {
     message: any;
     text: string;
     type: 'text' | 'image';
+    hasImage: boolean;
     imgMetaData: {
       url: string;
       mimeType: string;
@@ -38,11 +40,13 @@ type AIMetaData = {
     groupName: string;
     groupIsLocked: boolean;
   };
+  hasImage: boolean;
   imgMetaData: {
     url: string;
     mimeType: string;
     caption: string;
   };
+  hasAudio: boolean;
   audioMetaData: {
     url: string;
     mimeType: string;
