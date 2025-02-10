@@ -28,6 +28,7 @@
     "invariant": "^2.2.4",
     "mongo-baileys": "^1.0.1",
     "mongodb": "^6.8.0",
+    "ollama": "^0.5.12",
     "openai": "^4.56.0",
     "ora": "3.2.0",
     "qrcode-terminal": "^0.12.0",
