@@ -93,5 +93,5 @@ export const ENV: EnvInterface = {
   STABILITY_MODEL: process.env.STABILITY_MODEL || 'core',
 
   OLLAMA_PREFIX: process.env.OLLAMA_PREFIX,
-  OLLAMA_ENABLED: process.env.OLLAMA_ENABLED
+  OLLAMA_ENABLED: process.env.OLLAMA_ENABLED === 'True'
 };
