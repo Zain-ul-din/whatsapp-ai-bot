@@ -25,6 +25,10 @@ const config: Config = {
       prefix: ENV.STABILITY_PREFIX,
       enable: ENV.STABILITY_ENABLED
     },
+    Ollama: {
+      prefix: ENV.OLLAMA_PREFIX,
+      enable: ENV.OLLAMA_ENABLED
+    },
     Custom: [
       // custom model
       {
