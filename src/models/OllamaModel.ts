@@ -1,8 +1,6 @@
 import ollama from 'ollama';
-import { downloadMediaMessage } from '@whiskeysockets/baileys';
 
-import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
-import { ENV } from '../baileys/env';
+import { AIModel, AIArguments, AIHandle } from './BaseAiModel';
 
 /* Ollama Model */
 class OllamaModel extends AIModel<AIArguments, AIHandle> {
