@@ -29,13 +29,17 @@ class StabilityModel extends AIModel<AIArguments, AIHandle> {
 
     const formData = new FormData();
 
-    const response = await axios.postForm(this.endPointGenerate, axios.toFormData(payload, formData), {
-      validateStatus: undefined,
-      responseType: 'arraybuffer',
-      headers: this.headers
-    });
+    const response = await axios.postForm(
+      this.endPointGenerate,
+      axios.toFormData(payload, formData),
+      {
+        validateStatus: undefined,
+        responseType: 'arraybuffer',
+        headers: this.headers
+      }
+    );
 
-    if ( response.status === 200 ) {
+    if (response.status === 200) {
       return Buffer.from(response.data);
     } else {
       throw new Error(response.data.errors[0]);

@@ -15,7 +15,7 @@ class OllamaModel extends AIModel<AIArguments, AIHandle> {
   public async generateCompletion(user: string, prompt: string): Promise<string> {
     if (!this.sessionExists(user)) this.sessionCreate(user);
 
-    this.history[user].push(prompt);
+    this.history[user].push({ role: 'user', content: prompt });
     const response = await ollama.chat({
       // https://ollama.com/search
       model: 'deepseek-r1:1.5b',
@@ -23,7 +23,7 @@ class OllamaModel extends AIModel<AIArguments, AIHandle> {
     });
 
     const responseText = response.message.content;
-    this.history[user].push(responseText);
+    this.history[user].push({ role: 'assistant', content: responseText });
 
     return responseText;
   }
