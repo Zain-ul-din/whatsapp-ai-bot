@@ -4,7 +4,7 @@
 
 </div>
 
-The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`ChatGPT`**, **`DALL-E`**, **`Flux`**, and **`Stability AI`**.
+The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses to user input. The bot supports several AI models, including **`Gemini`**, **`ChatGPT`**, **`Ollama`**, **`DALL-E`**, **`Flux`**, and **`Stability AI`**.
 
 # Table of Content
 
@@ -19,15 +19,17 @@ The WhatsApp AI Bot is a chatbot that uses AI models APIs to generate responses 
 
 # Supported Models
 
-| Model | Provider | Type | Command |
-| ----- | -------- | ---- | ------- |
-| ChatGPT | [OpenAI](https://platform.openai.com/docs/guides/text-generation/quickstart) | Text to Text | !chatgpt |
-| Gemini | [Google](https://ai.google.dev/gemini-api/docs/text-generation?lang=node#generate-text-from-text) | Text to Text | !gemini |
-| Gemini Vision | [Google](https://ai.google.dev/gemini-api/docs/vision?lang=node#upload-image) | Image to Text | none |
-| Dalle 2 & 3 | [OpenAI](https://platform.openai.com/docs/api-reference/images/create) | Text to Image | !dalle |
-| Flux   | [Hugging Face](https://huggingface.co/black-forest-labs/FLUX.1-dev) | Text to Image | !flux |
-| Stability AI | [Stability AI](https://platform.stability.ai/docs/getting-started/stable-image) | Text to Image | !stability |
-| Custom | Base Provider | Text to Text | !wa | 
+| Model         | Provider                                                                                          | Type          | Command    |
+| ------------- | ------------------------------------------------------------------------------------------------- | ------------- | ---------- |
+| ChatGPT       | [OpenAI](https://platform.openai.com/docs/guides/text-generation/quickstart)                      | Text to Text  | !chatgpt   |
+| Gemini        | [Google](https://ai.google.dev/gemini-api/docs/text-generation?lang=node#generate-text-from-text) | Text to Text  | !gemini    |
+| Gemini Vision | [Google](https://ai.google.dev/gemini-api/docs/vision?lang=node#upload-image)                     | Image to Text | none       |
+| Dalle 2 & 3   | [OpenAI](https://platform.openai.com/docs/api-reference/images/create)                            | Text to Image | !dalle     |
+| Flux          | [Hugging Face](https://huggingface.co/black-forest-labs/FLUX.1-dev)                               | Text to Image | !flux      |
+| Stability AI  | [Stability AI](https://platform.stability.ai/docs/getting-started/stable-image)                   | Text to Image | !stability |
+| Ollama        | [Open Source](https://ollama.com/)                                                                | Text to Text  | !ollama    |
+| Custom        | Base Provider                                                                                     | Text to Text  | !wa        |
+
 # Demo
 
 ### Gemini
@@ -133,13 +135,13 @@ This bot utilizes [baileys](https://github.com/WhiskeySockets/Baileys) to operat
 A big thank you to these people for supporting this project.
 
 | ![Levitco](https://avatars.githubusercontent.com/u/47256157?v=4&s=128) | ![Anas Ashfaq](https://avatars.githubusercontent.com/u/119153707?v=4&s=128) | <img src="https://avatars.githubusercontent.com/u/0?v=4" width="150" height="150"/> |
-| --- | --- | --- |
-| Levitco | Anas Ashfaq | YOU? |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Levitco                                                                | Anas Ashfaq                                                                 | YOU?                                                                                |
 
 # Useful links
 
-| ♥ Sponsor | 💎 Bounty | 🚀 Deployment | ✉ WhatsApp Group |
-| ------- | ------ | ---------- | --------------- |
+| ♥ Sponsor                                  | 💎 Bounty                                       | 🚀 Deployment                           | ✉ WhatsApp Group                                         |
+| ------------------------------------------ | ----------------------------------------------- | --------------------------------------- | -------------------------------------------------------- |
 | [Link](https://buymeacoffee.com/zainuldin) | [Link](https://wa-ai-seven.vercel.app/feat-req) | [Link](https://wa-ai-seven.vercel.app/) | [Link](https://chat.whatsapp.com/DlVCpX2QQNx6jHQVT9IB7Z) |
 
 ## About Us
