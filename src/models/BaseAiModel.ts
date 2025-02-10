@@ -82,15 +82,19 @@ abstract class AIModel<AIArguments, CallBack> {
   public sessionCreate(user: string): void {
     this.history[user] = [];
   }
+
   public sessionRemove(user: string): void {
     delete this.history[user];
   }
+
   public sessionExists(user: string): boolean {
     return this.history[user] !== undefined;
   }
+
   public sessionAddMessage(user: string, args: any): void {
     this.history[user].push(args);
   }
+
   public addPrefixIcon(text: string): string {
     return this.iconPrefix + text;
   }
