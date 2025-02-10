@@ -48,6 +48,9 @@ interface EnvInterface {
   STABILITY_ENABLED: boolean;
   STABILITY_ICON_PREFIX?: string;
   STABILITY_MODEL: string;
+
+  OLLAMA_PREFIX?: string;
+  OLLAMA_ENABLED: boolean;
 }
 
 export const ENV: EnvInterface = {
@@ -87,5 +90,8 @@ export const ENV: EnvInterface = {
   STABILITY_PREFIX: process.env.STABILITY_PREFIX,
   STABILITY_ENABLED: process.env.STABILITY_ENABLED === 'True',
   STABILITY_ICON_PREFIX: process.env.STABILITY_ICON_PREFIX,
-  STABILITY_MODEL: process.env.STABILITY_MODEL || 'core'
+  STABILITY_MODEL: process.env.STABILITY_MODEL || 'core',
+
+  OLLAMA_PREFIX: process.env.OLLAMA_PREFIX,
+  OLLAMA_ENABLED: process.env.OLLAMA_ENABLED === 'True'
 };

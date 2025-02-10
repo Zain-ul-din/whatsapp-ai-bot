@@ -11,6 +11,7 @@ import { FluxModel } from './../../models/FluxModel';
 import { ENV } from '../env';
 import config from '../../whatsapp-ai.config';
 import { CustomAIModel } from '../../models/CustomModel';
+import { OllamaModel } from '../../models/OllamaModel';
 
 /* Declare models */
 const modelTable: Record<AIModels, any> = {
@@ -19,6 +20,7 @@ const modelTable: Record<AIModels, any> = {
   FLUX: ENV.HF_ENABLED ? new FluxModel() : null,
   Stability: ENV.STABILITY_ENABLED ? new StabilityModel() : null,
   Dalle: null,
+  Ollama: ENV.OLLAMA_ENABLED ? new OllamaModel() : null,
   Custom: config.models.Custom
     ? config.models.Custom.map((model) => new CustomAIModel(model))
     : null
