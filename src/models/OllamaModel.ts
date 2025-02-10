@@ -1,8 +1,6 @@
-/* Third-party modules */
 import ollama from 'ollama';
 import { downloadMediaMessage } from '@whiskeysockets/baileys';
 
-/* Local modules */
 import { AIModel, AIArguments, AIHandle, AIMetaData } from './BaseAiModel';
 import { ENV } from '../baileys/env';
 
@@ -19,7 +17,8 @@ class OllamaModel extends AIModel<AIArguments, AIHandle> {
 
     this.history[user].push(prompt);
     const response = await ollama.chat({
-      model: '',
+      // https://ollama.com/search
+      model: 'deepseek-r1:1.5b',
       messages: [...this.history[user]]
     });
 
