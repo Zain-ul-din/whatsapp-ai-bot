@@ -137,7 +137,7 @@ A big thank you to these people for supporting this project.
 
 | ♥ Sponsor                                  | 💎 Bounty                                       | 🚀 Deployment                           | ✉ WhatsApp Group                                         |
 | ------------------------------------------ | ----------------------------------------------- | --------------------------------------- | -------------------------------------------------------- |
-| [Link](https://buymeacoffee.com/zainuldin) | [Link](https://wa-ai-seven.vercel.app/feat-req) | [Link](https://wa-ai-seven.vercel.app/) | [Link](https://chat.whatsapp.com/DlVCpX2QQNx6jHQVT9IB7Z) |
+| [Link](https://buymeacoffee.com/zainuldin) | [Link](https://wa-ai-seven.vercel.app/feat-req) | [Link](https://wa-ai-seven.vercel.app/) | [Link](https://chat.whatsapp.com) |
 
 ## About Us
 
